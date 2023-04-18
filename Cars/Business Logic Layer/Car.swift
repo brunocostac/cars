@@ -11,12 +11,14 @@ class CarList {
     let cars: [Car] = []
 }
 
-class Car {
+class Car: Decodable {
     let id: String
     let name: String
+    let image_url: URL
     
-    init(id: String, name: String) {
+    init(id: String, name: String, image_url: URL) {
         self.id = id
         self.name = name
+        self.image_url = image_url
     }
 }
