@@ -47,7 +47,7 @@ class CarDetailView: UIView {
                 print("Error: \(error.localizedDescription)")
             } else if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    self.imageView.image = image // imageView is your UIImageView
+                    self.imageView.image = image
                 }
             }
         }.resume()

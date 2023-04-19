@@ -29,6 +29,7 @@ class CarListViewController: UIViewController {
         self.view = carsView
         carsView?.tableView.delegate = self
         carsView?.tableView.dataSource = self
+        carsView?.tableView.register(CarTableViewCell.self, forCellReuseIdentifier: "CarTableViewCell")
     }
     
     override func viewDidLoad() {
@@ -80,7 +81,7 @@ extension CarListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView
-            .dequeueReusableCell(withIdentifier: "Cell")!
+            .dequeueReusableCell(withIdentifier: "CarTableViewCell")!
         cell.textLabel?.text = self.cars[indexPath.row].name
         cell.selectionStyle = .none
         return cell
