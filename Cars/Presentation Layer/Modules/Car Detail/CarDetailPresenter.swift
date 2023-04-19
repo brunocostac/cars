@@ -17,8 +17,7 @@ class CarDetailPresenterImplementation: CarDetailPresenter {
     var viewController: CarDetailPresenterOutput?
     
     func interactor(didRetrieveCar car: Car) {
-        let carString = car.name
-        viewController?.presenter(didRetrieveItem: carString ?? "")
+        viewController?.presenter(didRetrieveCar: car)
     }
     
     func interactor(didFailRetrieveCar error: Error) {

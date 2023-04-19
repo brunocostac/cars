@@ -8,10 +8,10 @@
 import UIKit
 
 protocol CarListPresenterOutput: AnyObject {
-    func presenter(didRetrieveItems items: [String])
-    func presenter(didFailRetrieveItems message: String)
-    func presenter(didObtainItemId id: String)
-    func presenter(didFailObtainItemId message: String)
+    func presenter(didRetrieveCars cars: [Car])
+    func presenter(didFailRetrieveCars message: String)
+    func presenter(didObtainCarId id: String)
+    func presenter(didFailObtainCarId message: String)
 }
 
 class CarListViewController: UIViewController {
@@ -21,7 +21,7 @@ class CarListViewController: UIViewController {
     var interactor: CarListInteractor?
     var router: CarListRouter?
     
-    private var items: [String] = []
+    private var cars: [Car] = []
     
     // MARK: - Lifecycle Methods
     override func loadView() {
@@ -44,20 +44,20 @@ class CarListViewController: UIViewController {
 
 // MARK: - Presenter Output
 extension CarListViewController: CarListPresenterOutput {
-    func presenter(didRetrieveItems items: [String]) {
-        self.items = items
+    func presenter(didRetrieveCars cars: [Car]) {
+        self.cars = cars
         self.carsView?.reloadTableView()
     }
     
-    func presenter(didFailRetrieveItems message: String) {
+    func presenter(didFailRetrieveCars message: String) {
         showError(with: message)
     }
     
-    func presenter(didObtainItemId id: String) {
+    func presenter(didObtainCarId id: String) {
         self.router?.routeToDetail(with: id)
     }
     
-    func presenter(didFailObtainItemId message: String) {
+    func presenter(didFailObtainCarId message: String) {
         showError(with: message)
     }
 }
@@ -70,18 +70,18 @@ extension CarListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        self.items.isEmpty ?
+        self.cars.isEmpty ?
             self.carsView?.showPlaceholder() :
             self.carsView?.hidePlaceholder()
         
-        return self.items.count
+        return self.cars.count
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView
             .dequeueReusableCell(withIdentifier: "Cell")!
-        cell.textLabel?.text = self.items[indexPath.row]
+        cell.textLabel?.text = self.cars[indexPath.row].name
         cell.selectionStyle = .none
         return cell
     }

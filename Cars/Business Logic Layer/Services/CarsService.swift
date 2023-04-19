@@ -21,7 +21,7 @@ class CarsServiceImplementation: CarsService {
     }
     
     func getCars() throws -> [Car] {
-        let url = URL(string: "https://gist.githubusercontent.com/brunocostac/c3a37b482eb408b50661d41805ca9aac/raw/25b601db5ae94aff7c7fd65d9724398e7f8c9363/json")!
+        let url = URL(string: "https://gist.githubusercontent.com/brunocostac/51385c036f7e291d5515da416e860fcb/raw/2780c950f5bc7d6476bb8019fcab22488c36f990/json")!
         
         let semaphore = DispatchSemaphore(value: 0)
         var cars: [Car] = []

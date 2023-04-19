@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CarDetailPresenterOutput: AnyObject {
-    func presenter(didRetrieveItem item: String)
+    func presenter(didRetrieveCar car: Car)
     func presenter(didFailRetrieveItem message: String)
 }
 
@@ -37,8 +37,9 @@ class CarDetailViewController: UIViewController {
 
 // MARK: - Presenter Output
 extension CarDetailViewController: CarDetailPresenterOutput {
-    func presenter(didRetrieveItem item: String) {
-        carDetailView?.updateLabel(with: item)
+    func presenter(didRetrieveCar car: Car) {
+        carDetailView?.updateLabel(with: car.name)
+        carDetailView?.updateImage(imageURL: car.image_url)
     }
     
     func presenter(didFailRetrieveItem message: String) {

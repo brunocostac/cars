@@ -9,6 +9,24 @@ import UIKit
 
 class CarListView: UIView {
     
+    // MARK: - Properties
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.rowHeight = 70
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    lazy var placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Avenir-Heavy", size: 25)
+        label.text = "Nenhum carro encontrado!"
+        label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,24 +55,6 @@ class CarListView: UIView {
     public func reloadTableView() {
         self.tableView.reloadData()
     }
-    
-    // MARK: - Properties
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.rowHeight = 70
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
-    
-    lazy var placeholderLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "Avenir-Heavy", size: 25)
-        label.text = "Nenhum carro encontrado!"
-        label.textColor = .darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
 }
 
 // MARK: - UI Setup

@@ -17,15 +17,15 @@ class CarListPresenterImplementation: CarListPresenter {
     weak var viewController: CarListPresenterOutput?
     
     func interactor(didRetrieveCars cars: [Car]) {
-        let carsStrings = cars.compactMap { $0.name }
-        viewController?.presenter(didRetrieveItems: carsStrings)
+        //let carsStrings = cars.compactMap { $0.name }
+        viewController?.presenter(didRetrieveCars: cars)
     }
     
     func interactor(didFailRetrieveCars error: Error) {
-        viewController?.presenter(didFailRetrieveItems: error.localizedDescription)
+        viewController?.presenter(didFailRetrieveCars: error.localizedDescription)
     }
    
     func interactor(didFindCar car: Car) {
-        viewController?.presenter(didObtainItemId: car.id)
+        viewController?.presenter(didObtainCarId: car.id)
     }
 }
