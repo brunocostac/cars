@@ -39,7 +39,7 @@ class CarDetailViewController: UIViewController {
 extension CarDetailViewController: CarDetailPresenterOutput {
     func presenter(didRetrieveCar car: Car) {
         carDetailView?.updateLabel(with: car.name)
-        carDetailView?.updateImage(imageURL: car.image_url)
+        carDetailView?.updateImage(imageURL: car.url_image)
     }
     
     func presenter(didFailRetrieveItem message: String) {

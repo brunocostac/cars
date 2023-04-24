@@ -15,9 +15,20 @@ class CarTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
+    public func updateImage(imageURL: URL) {
+        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.carImage.image = image
+                }
+            }
+        }.resume()
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }

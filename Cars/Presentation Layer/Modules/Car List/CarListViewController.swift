@@ -10,13 +10,13 @@ import UIKit
 protocol CarListPresenterOutput: AnyObject {
     func presenter(didRetrieveCars cars: [Car])
     func presenter(didFailRetrieveCars message: String)
-    func presenter(didObtainCarId id: String)
+    func presenter(didObtainCarId id: Int, carType: CarType)
     func presenter(didFailObtainCarId message: String)
 }
 
-class CarListViewController: UIViewController {
-    // MARK: - Properties
+class CarListViewController: UIViewController, SegmentedControlDelegate {
     
+    // MARK: - Properties
     var carsView: CarListView?
     var interactor: CarListInteractor?
     var router: CarListRouter?
@@ -27,9 +27,10 @@ class CarListViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.view = carsView
+        self.carsView?.delegate = self
         carsView?.tableView.delegate = self
         carsView?.tableView.dataSource = self
-        carsView?.tableView.register(CarTableViewCell.self, forCellReuseIdentifier: "CarTableViewCell")
+        carsView?.tableView.register(UINib(nibName: "CarTableViewCell", bundle: nil), forCellReuseIdentifier: "CarTableViewCell")
     }
     
     override func viewDidLoad() {
@@ -41,10 +42,15 @@ class CarListViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Cars"
     }
+    
+    func didSegmentedValueChanged(selectedSegmentIndex: Int) {
+        self.interactor?.didSelectCarType(at: selectedSegmentIndex)
+    }
 }
 
 // MARK: - Presenter Output
 extension CarListViewController: CarListPresenterOutput {
+ 
     func presenter(didRetrieveCars cars: [Car]) {
         self.cars = cars
         self.carsView?.reloadTableView()
@@ -54,8 +60,8 @@ extension CarListViewController: CarListPresenterOutput {
         showError(with: message)
     }
     
-    func presenter(didObtainCarId id: String) {
-        self.router?.routeToDetail(with: id)
+    func presenter(didObtainCarId id: Int, carType: CarType) {
+        self.router?.routeToDetail(with: id, carType: carType)
     }
     
     func presenter(didFailObtainCarId message: String) {
@@ -80,9 +86,12 @@ extension CarListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView
-            .dequeueReusableCell(withIdentifier: "CarTableViewCell")!
-        cell.textLabel?.text = self.cars[indexPath.row].name
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CarTableViewCell", for: indexPath) as? CarTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.updateImage(imageURL: self.cars[indexPath.row].url_image)
+        cell.nameLabel.text = self.cars[indexPath.row].name
         cell.selectionStyle = .none
         return cell
     }

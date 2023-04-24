@@ -8,12 +8,13 @@
 import Foundation
 
 protocol CarDetailInteractor: AnyObject {
-    var carId: String? { get }
+    var carId: Int? { get }
     func viewDidLoad()
 }
 
 class CarDetailInteractorImplementation: CarDetailInteractor {
-    var carId: String?
+    var carId: Int?
+    var carType: CarType?
     
     var presenter: CarDetailPresenter?
     
@@ -21,7 +22,7 @@ class CarDetailInteractorImplementation: CarDetailInteractor {
     
     func viewDidLoad() {
         do {
-            if let car = try carService.getCar(with: self.carId!) {
+            if let car = try carService.getCar(with: self.carId!, carType: self.carType!) {
                 presenter?.interactor(didRetrieveCar: car)
             }
         } catch {
