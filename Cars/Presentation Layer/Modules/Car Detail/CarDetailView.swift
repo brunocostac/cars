@@ -14,12 +14,13 @@ class CarDetailView: UIView {
     lazy var imageView: UIImageView = {
        let image = UIImageView()
        image.translatesAutoresizingMaskIntoConstraints = false
+       image.contentMode = .scaleAspectFit
        return image
     }()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Avenir", size: 25)
+        label.font = .systemFont(ofSize: 25)
         label.textColor = .black
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +39,9 @@ class CarDetailView: UIView {
     
     // MARK: - Actions
     public func updateLabel(with text: String) {
-        titleLabel.text = text
+        DispatchQueue.main.async {
+            self.titleLabel.text = text
+        }
     }
     
     public func updateImage(imageURL: URL) {
@@ -63,18 +66,19 @@ extension CarDetailView {
         
         self.backgroundColor = .white
         
-        self.addSubview(imageView)
         self.addSubview(titleLabel)
+        self.addSubview(imageView)
         
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
+            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            
+            imageView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 16),
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             imageView.heightAnchor.constraint(equalToConstant: 300),
-            
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+        
         ])
     }
 }

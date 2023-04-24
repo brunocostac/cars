@@ -10,7 +10,7 @@ import UIKit
 class CarTableViewCell: UITableViewCell {
 
     @IBOutlet weak var carImage: UIImageView!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var nameLabel: UILabel!
     
     override func awakeFromNib() {
@@ -18,7 +18,13 @@ class CarTableViewCell: UITableViewCell {
     }
     
     public func updateImage(imageURL: URL) {
+        activityIndicator.startAnimating()
+    
         URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+            }
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             } else if let data = data, let image = UIImage(data: data) {
@@ -32,5 +38,4 @@ class CarTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }

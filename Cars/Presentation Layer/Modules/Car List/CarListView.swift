@@ -68,7 +68,9 @@ class CarListView: UIView {
     }
     
     public func reloadTableView() {
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 

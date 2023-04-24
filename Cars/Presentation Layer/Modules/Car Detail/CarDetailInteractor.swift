@@ -21,12 +21,19 @@ class CarDetailInteractorImplementation: CarDetailInteractor {
     private let carService = CarsServiceImplementation()
     
     func viewDidLoad() {
+        
         do {
-            if let car = try carService.getCar(with: self.carId!, carType: self.carType!) {
-                presenter?.interactor(didRetrieveCar: car)
+            let car = try carService.getCar(with: self.carId!, carType: self.carType!) { result in
+                switch result {
+                case .success(let car):
+                    self.presenter?.interactor(didRetrieveCar: car!)
+                case .failure(let error):
+                    print(error)
+                }
             }
         } catch {
-            presenter?.interactor(didFailRetrieveCar: error)
+            // Handle the error
+            self.presenter?.interactor(didFailRetrieveCar: error)
         }
     }
 }

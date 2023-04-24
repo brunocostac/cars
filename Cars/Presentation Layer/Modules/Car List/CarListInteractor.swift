@@ -24,8 +24,15 @@ class CarListInteractorImplementation: CarListInteractor {
     func viewDidLoad()  {
         do {
             self.selectedCarType = CarType.classic
-            self.cars = try carsService.getCars(with: selectedCarType!)
-            presenter?.interactor(didRetrieveCars: self.cars)
+            self.carsService.getCars(with: selectedCarType!) { result in
+                switch result {
+                case .success(let cars):
+                    self.cars = cars
+                    self.presenter?.interactor(didRetrieveCars: self.cars)
+                case .failure(let error):
+                    print(error)
+                }
+            }
         } catch {
             presenter?.interactor(didFailRetrieveCars: error)
         }
@@ -40,8 +47,15 @@ class CarListInteractorImplementation: CarListInteractor {
     func didSelectCarType(at carType: Int) {
         self.selectedCarType = CarType(rawValue: carType)
         do {
-            self.cars = try carsService.getCars(with: selectedCarType!)
-            presenter?.interactor(didRetrieveCars: self.cars)
+            self.carsService.getCars(with: selectedCarType!) { result in
+                switch result {
+                case .success(let cars):
+                    self.cars = cars
+                    self.presenter?.interactor(didRetrieveCars: self.cars)
+                case .failure(let error):
+                    print(error)
+                }
+            }
         } catch {
             presenter?.interactor(didFailRetrieveCars: error)
         }

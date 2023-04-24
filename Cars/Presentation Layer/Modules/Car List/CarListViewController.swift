@@ -75,13 +75,13 @@ extension CarListViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
-        self.cars.isEmpty ?
-            self.carsView?.showPlaceholder() :
-            self.carsView?.hidePlaceholder()
-        
-        return self.cars.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if cars.isEmpty {
+            carsView?.showPlaceholder()
+        } else {
+            carsView?.hidePlaceholder()
+        }
+        return cars.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -89,7 +89,6 @@ extension CarListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CarTableViewCell", for: indexPath) as? CarTableViewCell else {
             return UITableViewCell()
         }
-        
         cell.updateImage(imageURL: self.cars[indexPath.row].url_image)
         cell.nameLabel.text = self.cars[indexPath.row].name
         cell.selectionStyle = .none

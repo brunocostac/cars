@@ -8,8 +8,8 @@
 import Foundation
 
 protocol CarsService: AnyObject {
-    func getCars(with carType: CarType) throws -> [Car]
-    func getCar(with id: Int, carType: CarType) throws -> Car?
+    func getCars(with carType: CarType, completion: @escaping (Result<[Car], Error>) -> Void)
+    func getCar(with id: Int, carType: CarType, completion: @escaping (Result<Car?, Error>) -> Void)
     func getURL(with carType: CarType) -> URL
 }
 
@@ -35,39 +35,39 @@ class CarsServiceImplementation: CarsService {
         }
     }
     
-    func getCars(with carType: CarType) throws -> [Car] {
+    func getCars(with carType: CarType, completion: @escaping (Result<[Car], Error>) -> Void) {
         let url = self.getURL(with: carType)
-        let semaphore = DispatchSemaphore(value: 0)
-        var cars: [Car] = []
-        
         let task = session.dataTask(with: url) { data, response, error in
-            defer { semaphore.signal() }
-            
             if let error = error {
-                print("Error fetching cars: \(error)")
+                completion(.failure(error))
                 return
             }
             
             guard let data = data else {
-                print("No data returned from server")
+                completion(.failure(NSError(domain: "YourApp", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data returned from server"])))
                 return
             }
             
             do {
-                cars = try JSONDecoder().decode([Car].self, from: data)
+                let cars = try JSONDecoder().decode([Car].self, from: data)
+                completion(.success(cars))
             } catch {
-                print("Error decoding cars JSON: \(error)")
+                completion(.failure(error))
             }
         }
         
         task.resume()
-        semaphore.wait()
-        
-        return cars
     }
     
-    func getCar(with id: Int, carType: CarType) throws -> Car? {
-        let cars = try getCars(with: carType)
-        return cars.first(where: { $0.id == id })
+    func getCar(with id: Int, carType: CarType, completion: @escaping (Result<Car?, Error>) -> Void) {
+        self.getCars(with: carType) { result in
+            switch result {
+            case .success(let cars):
+                let car = cars.first(where: { $0.id == id })
+                completion(.success(car))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }
