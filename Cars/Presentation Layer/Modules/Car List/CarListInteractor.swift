@@ -9,7 +9,7 @@ import Foundation
 
 
 protocol CarListInteractor: AnyObject {
-    func viewDidLoad()
+    func viewDidAppear()
     func didSelectRow(at index: Int)
     func didSelectCarType(at carType: Int)
 }
@@ -21,7 +21,7 @@ class CarListInteractorImplementation: CarListInteractor {
     private var cars: [Car] = []
     private var selectedCarType: CarType?
     
-    func viewDidLoad()  {
+    func viewDidAppear()  {
         do {
             self.selectedCarType = CarType.classic
             self.carsService.getCars(with: selectedCarType!) { result in

@@ -20,12 +20,13 @@ class CarListViewController: UIViewController, SegmentedControlDelegate {
     var carsView: CarListView?
     var interactor: CarListInteractor?
     var router: CarListRouter?
-    
+    var carsRetrieved = false
     private var cars: [Car] = []
     
     // MARK: - Lifecycle Methods
-    override func loadView() {
-        super.loadView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         self.view = carsView
         self.carsView?.delegate = self
         carsView?.tableView.delegate = self
@@ -33,9 +34,9 @@ class CarListViewController: UIViewController, SegmentedControlDelegate {
         carsView?.tableView.register(UINib(nibName: "CarTableViewCell", bundle: nil), forCellReuseIdentifier: "CarTableViewCell")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        interactor?.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.interactor?.viewDidAppear()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +53,7 @@ class CarListViewController: UIViewController, SegmentedControlDelegate {
 extension CarListViewController: CarListPresenterOutput {
  
     func presenter(didRetrieveCars cars: [Car]) {
+        self.carsRetrieved = true
         self.cars = cars
         self.carsView?.reloadTableView()
     }
@@ -77,7 +79,7 @@ extension CarListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if cars.count == 0 {
+        if cars.count == 0 && carsRetrieved {
             carsView?.tableView.setEmptyView(title: "No cars were found.", message: "", messageImage: UIImage(systemName: "magnifyingglass.circle")!)
         } else {
             carsView?.tableView.backgroundView = nil
