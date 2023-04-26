@@ -32,14 +32,6 @@ class CarListView: UIView {
         return tableView
     }()
     
-    lazy var placeholderLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "Avenir-Heavy", size: 25)
-        label.text = "Nenhum carro encontrado!"
-        label.textColor = .darkGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -50,21 +42,6 @@ class CarListView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Actions
-    public func showPlaceholder() {
-        UIView.animate(withDuration: 0.3) {
-            self.placeholderLabel.alpha = 1.0
-            self.tableView.alpha = 0.0
-        }
-    }
-    
-    public func hidePlaceholder() {
-        UIView.animate(withDuration: 0.3) {
-            self.placeholderLabel.alpha = 0.0
-            self.tableView.alpha = 1.0
-        }
     }
     
     public func reloadTableView() {
@@ -83,7 +60,6 @@ extension CarListView {
         self.backgroundColor = UIColor(red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0)
         self.addSubview(segmentedControl)
         self.addSubview(tableView)
-        self.addSubview(placeholderLabel)
         
         NSLayoutConstraint.activate([
             segmentedControl.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -96,11 +72,6 @@ extension CarListView {
             tableView.rightAnchor.constraint(equalTo: self.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             tableView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 10),
-        ])
-        
-        NSLayoutConstraint.activate([
-            placeholderLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            placeholderLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
     }
     

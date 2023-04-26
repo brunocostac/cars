@@ -30,7 +30,7 @@ class CarListInteractorImplementation: CarListInteractor {
                     self.cars = cars
                     self.presenter?.interactor(didRetrieveCars: self.cars)
                 case .failure(let error):
-                    print(error)
+                    self.presenter?.interactor(didFailRetrieveCars: error)
                 }
             }
         } catch {

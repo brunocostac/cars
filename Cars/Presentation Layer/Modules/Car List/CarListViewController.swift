@@ -57,7 +57,8 @@ extension CarListViewController: CarListPresenterOutput {
     }
     
     func presenter(didFailRetrieveCars message: String) {
-        showError(with: message)
+        self.showError(with: message)
+        self.carsView?.reloadTableView()
     }
     
     func presenter(didObtainCarId id: Int, carType: CarType) {
@@ -76,10 +77,10 @@ extension CarListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if cars.isEmpty {
-            carsView?.showPlaceholder()
+        if cars.count == 0 {
+            carsView?.tableView.setEmptyView(title: "No cars were found.", message: "", messageImage: UIImage(systemName: "magnifyingglass.circle")!)
         } else {
-            carsView?.hidePlaceholder()
+            carsView?.tableView.backgroundView = nil
         }
         return cars.count
     }
