@@ -12,9 +12,16 @@ class CarTableViewCell: UITableViewCell {
     @IBOutlet weak var carImage: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var descLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 4
+        layer.cornerRadius = 10 // You can adjust the corner radius value to your preference
+        layer.masksToBounds = true
     }
     
     public func updateImage(imageURL: URL) {

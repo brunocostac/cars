@@ -26,7 +26,7 @@ class CarListView: UIView {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.rowHeight = 70
+        tableView.rowHeight = 100
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -80,7 +80,7 @@ extension CarListView {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0)
         self.addSubview(segmentedControl)
         self.addSubview(tableView)
         self.addSubview(placeholderLabel)

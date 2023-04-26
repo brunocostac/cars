@@ -91,10 +91,10 @@ extension CarListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.updateImage(imageURL: self.cars[indexPath.row].url_image)
         cell.nameLabel.text = self.cars[indexPath.row].name
+        cell.descLabel.text = self.cars[indexPath.row].desc
         cell.selectionStyle = .none
         return cell
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.interactor?.didSelectRow(at: indexPath.row)
     }
