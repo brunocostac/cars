@@ -27,7 +27,7 @@ extension UIViewController {
     }
 }
 
-extension UITableView {
+extension UICollectionView {
     
     @objc func setEmptyView(title: String, message: String, messageImage: UIImage) {
         
@@ -90,6 +90,5 @@ extension UITableView {
             
         })
         self.backgroundView = emptyView
-        self.separatorStyle = .none
     }
 }

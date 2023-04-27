@@ -7,10 +7,10 @@
 
 import UIKit
 
-class CarTableViewCell: UITableViewCell {
+class CarCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var carImage: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var carImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
     
@@ -40,9 +40,5 @@ class CarTableViewCell: UITableViewCell {
                 }
             }
         }.resume()
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 }

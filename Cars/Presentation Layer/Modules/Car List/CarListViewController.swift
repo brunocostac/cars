@@ -29,9 +29,9 @@ class CarListViewController: UIViewController, SegmentedControlDelegate {
         super.viewDidLoad()
         self.view = carsView
         self.carsView?.delegate = self
-        carsView?.tableView.delegate = self
-        carsView?.tableView.dataSource = self
-        carsView?.tableView.register(UINib(nibName: "CarTableViewCell", bundle: nil), forCellReuseIdentifier: "CarTableViewCell")
+        carsView?.collectionView.delegate = self
+        carsView?.collectionView.dataSource = self
+        carsView?.collectionView.register(UINib(nibName: "CarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CarCollectionViewCell")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,7 +41,7 @@ class CarListViewController: UIViewController, SegmentedControlDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = "Cars"
+        self.navigationItem.title = "Home"
     }
     
     func didSegmentedValueChanged(selectedSegmentIndex: Int) {
@@ -73,32 +73,29 @@ extension CarListViewController: CarListPresenterOutput {
 }
 
 // MARK: - UITableView DataSource & Delegate
-extension CarListViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension CarListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if cars.count == 0 && carsRetrieved {
-            carsView?.tableView.setEmptyView(title: "No cars were found.", message: "", messageImage: UIImage(systemName: "magnifyingglass.circle")!)
+            carsView?.collectionView.setEmptyView(title: "No cars were found.", message: "", messageImage: UIImage(systemName: "magnifyingglass.circle")!)
         } else {
-            carsView?.tableView.backgroundView = nil
+            carsView?.collectionView.backgroundView = nil
         }
         return cars.count
     }
     
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CarTableViewCell", for: indexPath) as? CarTableViewCell else {
-            return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = self.carsView?.collectionView.dequeueReusableCell(withReuseIdentifier: "CarCollectionViewCell", for: indexPath) as? CarCollectionViewCell else {
+            return UICollectionViewCell()
         }
         cell.updateImage(imageURL: self.cars[indexPath.row].url_image)
         cell.nameLabel.text = self.cars[indexPath.row].name
-        cell.descLabel.text = self.cars[indexPath.row].desc
-        cell.selectionStyle = .none
+        cell.descLabel.text = "$ \(self.cars[indexPath.row].price)"
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.interactor?.didSelectRow(at: indexPath.row)
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let minimumInteritemSpacing = 9
+        let optimisedWidth = (Int(collectionView.frame.width) - minimumInteritemSpacing) / 2
+        return CGSize(width: optimisedWidth , height: optimisedWidth)
     }
 }

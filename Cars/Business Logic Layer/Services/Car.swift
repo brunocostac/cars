@@ -14,6 +14,7 @@ class CarList {
 class Car: Decodable {
     let id: Int
     let name: String
+    let price: String
     let url_image: URL
     let desc: String
     let url_info: URL
@@ -21,9 +22,10 @@ class Car: Decodable {
     let latitude: String
     let longitude: String
     
-    init(id: Int, name: String, url_image: URL, desc: String, url_info: URL, url_video: URL, latitude: String, longitude: String) {
+    init(id: Int, name: String, url_image: URL, price: String, desc: String, url_info: URL, url_video: URL, latitude: String, longitude: String) {
         self.id = id
         self.name = name
+        self.price = price
         self.url_image = url_image
         self.desc = desc
         self.url_info = url_info

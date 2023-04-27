@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarCollectionViewCell" customModule="Cars"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CarCollectionViewCell" id="azs-vR-V7R" customClass="CarCollectionViewCell" customModule="Cars">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Dpa-nr-TIu">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="imm-Ka-A8l" userLabel="Card View">
+                        <rect key="frame" x="16" y="16" width="168" height="168"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="DRd-FB-5JB">
+                                <rect key="frame" x="8" y="104" width="152" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rSG-XZ-c3v">
+                                        <rect key="frame" x="0.0" y="0.0" width="152" height="31.333333333333332"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="$ 5000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-DG-QTk">
+                                        <rect key="frame" x="0.0" y="32.333333333333343" width="45.666666666666664" height="27.666666666666671"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="rSG-XZ-c3v" secondAttribute="trailing" id="at6-Ea-X5g"/>
+                                    <constraint firstItem="rSG-XZ-c3v" firstAttribute="leading" secondItem="DRd-FB-5JB" secondAttribute="leading" id="xhg-Jt-Yrh"/>
+                                </constraints>
+                            </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="C1m-dZ-riK">
+                                <rect key="frame" x="0.0" y="42" width="168" height="20"/>
+                            </activityIndicatorView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Ff-NM-gDw">
+                                <rect key="frame" x="0.0" y="8" width="168" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="ZTW-8L-73A"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="C1m-dZ-riK" firstAttribute="top" secondItem="imm-Ka-A8l" secondAttribute="top" constant="42" id="0Ey-fm-wsa"/>
+                            <constraint firstAttribute="trailing" secondItem="DRd-FB-5JB" secondAttribute="trailing" constant="8" id="Jg1-EU-QAK"/>
+                            <constraint firstItem="C1m-dZ-riK" firstAttribute="leading" secondItem="imm-Ka-A8l" secondAttribute="leading" id="NYF-DF-HeP"/>
+                            <constraint firstItem="DRd-FB-5JB" firstAttribute="top" secondItem="1Ff-NM-gDw" secondAttribute="bottom" constant="16" id="Vcp-Is-Vlo"/>
+                            <constraint firstAttribute="trailing" secondItem="1Ff-NM-gDw" secondAttribute="trailing" id="WfG-Zl-T8F"/>
+                            <constraint firstItem="1Ff-NM-gDw" firstAttribute="leading" secondItem="imm-Ka-A8l" secondAttribute="leading" id="daj-Gh-EKt"/>
+                            <constraint firstItem="DRd-FB-5JB" firstAttribute="leading" secondItem="imm-Ka-A8l" secondAttribute="leading" constant="8" id="oij-LV-2y0"/>
+                            <constraint firstAttribute="bottom" secondItem="DRd-FB-5JB" secondAttribute="bottom" constant="4" id="r2L-rB-q82"/>
+                            <constraint firstAttribute="trailing" secondItem="C1m-dZ-riK" secondAttribute="trailing" id="x5P-bb-xCi"/>
+                            <constraint firstItem="1Ff-NM-gDw" firstAttribute="top" secondItem="imm-Ka-A8l" secondAttribute="top" constant="8" id="z7b-vn-Q1V"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="imm-Ka-A8l" firstAttribute="top" secondItem="Dpa-nr-TIu" secondAttribute="top" constant="16" id="8Xr-t2-jEI"/>
+                    <constraint firstAttribute="trailing" secondItem="imm-Ka-A8l" secondAttribute="trailing" constant="16" id="Kdo-Hf-ROf"/>
+                    <constraint firstAttribute="bottom" secondItem="imm-Ka-A8l" secondAttribute="bottom" constant="16" id="MSj-nX-IEU"/>
+                    <constraint firstItem="imm-Ka-A8l" firstAttribute="leading" secondItem="Dpa-nr-TIu" secondAttribute="leading" constant="16" id="RrJ-k0-ZJX"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="405" height="116"/>
+            <connections>
+                <outlet property="activityIndicator" destination="C1m-dZ-riK" id="pRf-nN-hMK"/>
+                <outlet property="carImage" destination="1Ff-NM-gDw" id="HuM-Fu-OX2"/>
+                <outlet property="descLabel" destination="dJ5-DG-QTk" id="Iab-ZN-jT2"/>
+                <outlet property="nameLabel" destination="rSG-XZ-c3v" id="zcf-oi-tmA"/>
+            </connections>
+            <point key="canvasLocation" x="190.83969465648855" y="-376.76056338028172"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="tertiarySystemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
