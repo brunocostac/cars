@@ -24,5 +24,6 @@ class CarListConfigurator {
         presenter.viewController = viewController
         
         router.navigationController = viewController.navigationController
+        router.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
     }
 }

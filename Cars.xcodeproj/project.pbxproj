@@ -28,6 +28,8 @@
 		114D7C3029EDDF2B00BC1888 /* CarListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7C2A29EDDF2B00BC1888 /* CarListConfigurator.swift */; };
 		114D7C3129EDDF2B00BC1888 /* CarListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7C2B29EDDF2B00BC1888 /* CarListPresenter.swift */; };
 		114D7C3329EDDF9A00BC1888 /* CarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7C3229EDDF9A00BC1888 /* CarListViewController.swift */; };
+		11AE0E7F29FB271100B21C1A /* CarTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AE0E7D29FB271100B21C1A /* CarTypeCollectionViewCell.swift */; };
+		11AE0E8029FB271100B21C1A /* CarTypeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11AE0E7E29FB271100B21C1A /* CarTypeCollectionViewCell.xib */; };
 		11F1B3A429F94EB200628023 /* CarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F1B3A329F94EB100628023 /* CarCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,8 @@
 		114D7C2A29EDDF2B00BC1888 /* CarListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListConfigurator.swift; sourceTree = "<group>"; };
 		114D7C2B29EDDF2B00BC1888 /* CarListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListPresenter.swift; sourceTree = "<group>"; };
 		114D7C3229EDDF9A00BC1888 /* CarListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListViewController.swift; sourceTree = "<group>"; };
+		11AE0E7D29FB271100B21C1A /* CarTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTypeCollectionViewCell.swift; sourceTree = "<group>"; };
+		11AE0E7E29FB271100B21C1A /* CarTypeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarTypeCollectionViewCell.xib; sourceTree = "<group>"; };
 		11F1B3A329F94EB100628023 /* CarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +169,8 @@
 				114D7C2829EDDF2B00BC1888 /* CarListView.swift */,
 				114BC67429F0291B001A401F /* CarCollectionViewCell.swift */,
 				11F1B3A329F94EB100628023 /* CarCollectionViewCell.xib */,
+				11AE0E7D29FB271100B21C1A /* CarTypeCollectionViewCell.swift */,
+				11AE0E7E29FB271100B21C1A /* CarTypeCollectionViewCell.xib */,
 			);
 			path = "Car List";
 			sourceTree = "<group>";
@@ -238,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11F1B3A429F94EB200628023 /* CarCollectionViewCell.xib in Resources */,
+				11AE0E8029FB271100B21C1A /* CarTypeCollectionViewCell.xib in Resources */,
 				114D7C0529EDC2CE00BC1888 /* LaunchScreen.storyboard in Resources */,
 				114D7C0229EDC2CE00BC1888 /* Assets.xcassets in Resources */,
 			);
@@ -263,6 +270,7 @@
 				114D7C1129EDDDEA00BC1888 /* CarsService.swift in Sources */,
 				114D7BFB29EDC2CA00BC1888 /* SceneDelegate.swift in Sources */,
 				114D7C3329EDDF9A00BC1888 /* CarListViewController.swift in Sources */,
+				11AE0E7F29FB271100B21C1A /* CarTypeCollectionViewCell.swift in Sources */,
 				114BC67929F08905001A401F /* CarType.swift in Sources */,
 				114D7C2429EDDF0E00BC1888 /* CarDetailView.swift in Sources */,
 				114BC67629F0291C001A401F /* CarCollectionViewCell.swift in Sources */,

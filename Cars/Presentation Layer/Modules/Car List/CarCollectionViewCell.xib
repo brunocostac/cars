@@ -77,6 +77,11 @@
                     <constraint firstAttribute="bottom" secondItem="imm-Ka-A8l" secondAttribute="bottom" constant="16" id="MSj-nX-IEU"/>
                     <constraint firstItem="imm-Ka-A8l" firstAttribute="leading" secondItem="Dpa-nr-TIu" secondAttribute="leading" constant="16" id="RrJ-k0-ZJX"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                        <integer key="value" value="10"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </collectionViewCellContentView>
             <size key="customSize" width="405" height="116"/>
             <connections>
