@@ -12,7 +12,7 @@ class CarListView: UIView {
     // MARK: - Properties
     lazy var categoryLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Avenir-Heavy", size: 25)
+        label.font = UIFont(name: "Avenir", size: 25)
         label.textColor = .darkGray
         label.text = "Categories"
         label.numberOfLines = 0
@@ -23,7 +23,7 @@ class CarListView: UIView {
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Avenir-Heavy", size: 25)
+        label.font = UIFont(name: "Avenir", size: 25)
         label.textColor = .darkGray
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +88,7 @@ extension CarListView {
         
         NSLayoutConstraint.activate([
             categoryLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
-            categoryLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            categoryLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
             categoryLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
         
@@ -102,7 +102,7 @@ extension CarListView {
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: carTypeListCollectionView.bottomAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
             titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
         

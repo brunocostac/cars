@@ -16,12 +16,13 @@ class CarCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 4
-        layer.cornerRadius = 10 // You can adjust the corner radius value to your preference
-        layer.masksToBounds = true
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 0.5)
+        self.layer.shadowRadius = 1
+        self.layer.shadowOpacity = 0.3
+        self.layer.masksToBounds = false
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
     }
     
     public func updateImage(imageURL: URL) {

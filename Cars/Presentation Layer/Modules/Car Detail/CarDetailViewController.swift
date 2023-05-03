@@ -38,6 +38,9 @@ class CarDetailViewController: UIViewController {
 // MARK: - Presenter Output
 extension CarDetailViewController: CarDetailPresenterOutput {
     func presenter(didRetrieveCar car: Car) {
+        DispatchQueue.main.async {
+          self.title = car.name
+        }
         carDetailView?.updateLabel(with: car.name)
         carDetailView?.updateImage(imageURL: car.url_image)
     }

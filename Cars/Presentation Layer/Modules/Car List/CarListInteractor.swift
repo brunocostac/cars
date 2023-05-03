@@ -38,12 +38,15 @@ class CarListInteractorImplementation: CarListInteractor {
         let sportsCarType = ["id": CarType.sports.id, "name": CarType.sports.name, "image_url": "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/Audi_Spyder.png"] as [String : Any]
         carTypes.append(sportsCarType)
         
+        let newCarsType = ["id": CarType.newCars.id, "name": CarType.newCars.name, "image_url": "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/Audi_Spyder.png"] as [String : Any]
+        carTypes.append(newCarsType)
+        
         self.presenter?.interactor(didRetrieveCarType: carTypes)
     }
     
     func getCars() {
         do {
-            self.selectedCarType = CarType.classic
+            self.selectedCarType = CarType.newCars
             self.carsService.getCars(with: selectedCarType!) { result in
                 switch result {
                 case .success(let cars):

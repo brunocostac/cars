@@ -11,6 +11,7 @@ enum CarType: Int {
     case classic = 0
     case luxury = 1
     case sports = 2
+    case newCars = 3
     
     var id: Int {
         return self.rawValue
@@ -24,6 +25,8 @@ enum CarType: Int {
             return "Luxury"
         case .sports:
             return "Sports"
+        case .newCars:
+            return "New Cars"
         }
     }
 }
