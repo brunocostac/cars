@@ -66,19 +66,18 @@ extension CarDetailView {
         
         self.backgroundColor = .white
         
-        //self.addSubview(titleLabel)
+        self.addSubview(titleLabel)
         self.addSubview(imageView)
         
         
         NSLayoutConstraint.activate([
-            //titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
-           // titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            
             imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 0),
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
             imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             imageView.heightAnchor.constraint(equalToConstant: 300),
-        
+            
+            titleLabel.topAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
         ])
     }
 }

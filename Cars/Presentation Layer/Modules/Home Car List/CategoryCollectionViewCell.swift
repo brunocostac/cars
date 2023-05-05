@@ -1,18 +1,16 @@
 //
-//  CarTableViewCell.swift
+//  CarTypeCollectionViewCell.swift
 //  Cars
 //
-//  Created by Bruno Costa on 19/04/23.
+//  Created by Bruno Costa on 27/04/23.
 //
 
 import UIKit
 
-class CarCollectionViewCell: UICollectionViewCell {
-
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var carImage: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var descLabel: UILabel!
+class CategoryCollectionViewCell: UICollectionViewCell {
+   
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,19 +23,16 @@ class CarCollectionViewCell: UICollectionViewCell {
         self.layer.rasterizationScale = UIScreen.main.scale
     }
     
-    public func updateImage(imageURL: URL) {
-        activityIndicator.startAnimating()
-    
-        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-            }
+    public func updateImage(imageURL: String) {
+
+        let image_URL = URL(string: imageURL)!
+        
+        URLSession.shared.dataTask(with: image_URL) { (data, response, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             } else if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    self.carImage.image = image
+                    self.imageView.image = image
                 }
             }
         }.resume()

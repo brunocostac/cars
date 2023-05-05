@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CarType: Int {
+enum Category: Int {
     case classic = 0
     case luxury = 1
     case sports = 2

@@ -14,7 +14,7 @@ class CarListView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Avenir", size: 25)
         label.textColor = .darkGray
-        label.text = "Categories"
+        label.text = "Explore"
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -30,7 +30,7 @@ class CarListView: UIView {
         return label
     }()
     
-    let carTypeListCollectionView: UICollectionView = {
+    let categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -61,9 +61,9 @@ class CarListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func reloadTypeListCarCollectionView() {
+    public func reloadCategoriesCollectionView() {
         DispatchQueue.main.async {
-            self.carTypeListCollectionView.reloadData()
+            self.categoryCollectionView.reloadData()
         }
     }
     
@@ -82,7 +82,7 @@ extension CarListView {
         }
         self.backgroundColor =  UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
         self.addSubview(categoryLabel)
-        self.addSubview(carTypeListCollectionView)
+        self.addSubview(categoryCollectionView)
         self.addSubview(titleLabel)
         self.addSubview(carCollectionView)
         
@@ -93,15 +93,15 @@ extension CarListView {
         ])
         
         NSLayoutConstraint.activate([
-            carTypeListCollectionView.topAnchor.constraint(equalTo: self.categoryLabel.bottomAnchor, constant: 10),
-            carTypeListCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            carTypeListCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            carTypeListCollectionView.heightAnchor.constraint(equalToConstant: 100)
+            categoryCollectionView.topAnchor.constraint(equalTo: self.categoryLabel.bottomAnchor, constant: 10),
+            categoryCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            categoryCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            categoryCollectionView.heightAnchor.constraint(equalToConstant: 100)
         ])
      
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: carTypeListCollectionView.bottomAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 24),
             titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
             titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])

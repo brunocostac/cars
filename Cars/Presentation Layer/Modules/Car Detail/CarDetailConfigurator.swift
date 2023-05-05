@@ -9,7 +9,7 @@ import Foundation
 
 class CarDetailConfigurator {
     
-    static func configureModule(carId: Int, carType: CarType,
+    static func configureModule(carId: Int, category: Category,
                                 viewController: CarDetailViewController) {
         let view = CarDetailView()
         let router = CarDetailRouterImplementation()
@@ -17,7 +17,7 @@ class CarDetailConfigurator {
         let presenter = CarDetailPresenterImplementation()
             
         interactor.carId = carId
-        interactor.carType = carType
+        interactor.category = category
         
         viewController.carDetailView = view
         viewController.router = router

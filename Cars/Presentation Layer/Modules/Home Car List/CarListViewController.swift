@@ -9,11 +9,12 @@ import UIKit
 
 protocol CarListPresenterOutput: AnyObject {
     func presenter(didRetrieveCars cars: [Car])
-    func presenter(didRetrieverCarTypeList carTypeList: [[String: Any]])
-    func presenter(didRetrieveCarTypeName name: String)
+    func presenter(didRetrieveCategories categories: [[String: Any]])
+    func presenter(didRetrieveCategoryName name: String)
     func presenter(didFailRetrieveCars message: String)
-    func presenter(didObtainCarId id: Int, carType: CarType)
+    func presenter(didObtainCarId id: Int, category: Category)
     func presenter(didFailObtainCarId message: String)
+    func presenter(didSelectCategory category: Category)
 }
 
 class CarListViewController: UIViewController {
@@ -24,7 +25,7 @@ class CarListViewController: UIViewController {
     var router: CarListRouter?
     var carsRetrieved = false
     private var cars: [Car] = []
-    private var carTypeList: [[String : Any]] = []
+    private var categories: [[String : Any]] = []
     
     // MARK: - Lifecycle Methods
     
@@ -33,11 +34,11 @@ class CarListViewController: UIViewController {
         self.view = carsView
         carsView?.carCollectionView.delegate = self
         carsView?.carCollectionView.dataSource = self
-        carsView?.carCollectionView.register(UINib(nibName: "CarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CarCollectionViewCell")
+        carsView?.carCollectionView.register(UINib(nibName: "HomeCarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeCarCollectionViewCell")
         
-        carsView?.carTypeListCollectionView.delegate = self
-        carsView?.carTypeListCollectionView.dataSource = self
-        carsView?.carTypeListCollectionView.register(UINib(nibName: "CarTypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CarTypeCollectionViewCell")
+        carsView?.categoryCollectionView.delegate = self
+        carsView?.categoryCollectionView.dataSource = self
+        carsView?.categoryCollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,9 +54,13 @@ class CarListViewController: UIViewController {
 
 // MARK: - Presenter Output
 extension CarListViewController: CarListPresenterOutput {
-    func presenter(didRetrieverCarTypeList carTypeList: [[String : Any]]) {
-        self.carTypeList = carTypeList
-        self.carsView?.reloadTypeListCarCollectionView()
+    func presenter(didSelectCategory category: Category) {
+        self.router?.routeToCategorizedCarList(category: category)
+    }
+    
+    func presenter(didRetrieveCategories categories: [[String : Any]]) {
+        self.categories = categories
+        self.carsView?.reloadCategoriesCollectionView()
     }
     
     func presenter(didRetrieveCars cars: [Car]) {
@@ -64,7 +69,7 @@ extension CarListViewController: CarListPresenterOutput {
         self.carsView?.reloadCarCollectionView()
     }
     
-    func presenter(didRetrieveCarTypeName name: String) {
+    func presenter(didRetrieveCategoryName name: String) {
         DispatchQueue.main.async {
           self.carsView?.titleLabel.text = name
         }
@@ -75,8 +80,8 @@ extension CarListViewController: CarListPresenterOutput {
         self.carsView?.reloadCarCollectionView()
     }
     
-    func presenter(didObtainCarId id: Int, carType: CarType) {
-        self.router?.routeToDetail(with: id, carType: carType)
+    func presenter(didObtainCarId id: Int, category: Category) {
+        self.router?.routeToDetail(with: id, category: category)
     }
     
     func presenter(didFailObtainCarId message: String) {
@@ -88,7 +93,7 @@ extension CarListViewController: CarListPresenterOutput {
 extension CarListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
-            return carTypeList.count
+            return categories.count
         } else {
             if cars.count == 0 && carsRetrieved {
                 carsView?.carCollectionView.setEmptyView(title: "No cars were found.", message: "", messageImage: UIImage(systemName: "magnifyingglass.circle")!)
@@ -101,16 +106,16 @@ extension CarListViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.tag == 1 {
-            guard let carTypeCell = self.carsView?.carTypeListCollectionView.dequeueReusableCell(withReuseIdentifier: "CarTypeCollectionViewCell", for: indexPath) as? CarTypeCollectionViewCell else {
+            guard let categoryCell = self.carsView?.categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as? CategoryCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            carTypeCell.updateImage(imageURL: self.carTypeList[indexPath.row]["image_url"] as! String)
-            carTypeCell.titleLabel.text = self.carTypeList[indexPath.row]["name"] as? String
+            categoryCell.updateImage(imageURL: self.categories[indexPath.row]["image_url"] as! String)
+            categoryCell.titleLabel.text = self.categories[indexPath.row]["name"] as? String
             
-            return carTypeCell
+            return categoryCell
             
         } else {
-            guard let carCell = self.carsView?.carCollectionView.dequeueReusableCell(withReuseIdentifier: "CarCollectionViewCell", for: indexPath) as? CarCollectionViewCell else {
+            guard let carCell = self.carsView?.carCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeCarCollectionViewCell", for: indexPath) as? HomeCarCollectionViewCell else {
                 return UICollectionViewCell()
             }
             carCell.updateImage(imageURL: self.cars[indexPath.row].url_image)
@@ -135,7 +140,7 @@ extension CarListViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 1 {
-            self.interactor?.didSelectCarType(at: indexPath.row)
+            self.interactor?.didSelectCategory(at: indexPath.row)
         } else {
             self.interactor?.didSelectRow(at: indexPath.row)
         }

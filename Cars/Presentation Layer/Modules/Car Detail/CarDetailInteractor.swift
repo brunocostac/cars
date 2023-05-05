@@ -14,7 +14,7 @@ protocol CarDetailInteractor: AnyObject {
 
 class CarDetailInteractorImplementation: CarDetailInteractor {
     var carId: Int?
-    var carType: CarType?
+    var category: Category?
     
     var presenter: CarDetailPresenter?
     
@@ -23,7 +23,7 @@ class CarDetailInteractorImplementation: CarDetailInteractor {
     func viewDidLoad() {
         
         do {
-            let car = try carService.getCar(with: self.carId!, carType: self.carType!) { result in
+            let car = try carService.getCar(with: self.carId!, category: self.category!) { result in
                 switch result {
                 case .success(let car):
                     self.presenter?.interactor(didRetrieveCar: car!)
