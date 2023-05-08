@@ -8,8 +8,7 @@
 import UIKit
 
 protocol CategorizedCarListRouter: AnyObject {
-    var navigationController: UINavigationController? { get }
-    
+    var navigationController: UINavigationController? { get set}
     func routeToDetail(with id: Int, category: Category)
 }
 

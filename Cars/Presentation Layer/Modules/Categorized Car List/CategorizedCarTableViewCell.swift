@@ -35,6 +35,15 @@ class CategorizedCarTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 0.5)
+        self.layer.shadowRadius = 1
+        self.layer.shadowOpacity = 0.3
+        self.layer.masksToBounds = false
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+        
         self.setupUI()
     }
     
@@ -47,7 +56,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
         addSubview(carNameLabel)
         addSubview(carPriceLabel)
         
-        
+        self.separatorInset = .zero
         NSLayoutConstraint.activate([
             carImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             carImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),

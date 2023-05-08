@@ -10,6 +10,7 @@ import Foundation
 protocol CategorizedCarListPresenter: AnyObject {
     func interactor(didRetrieveCars cars: [Car])
     func interactor(didFailRetrieveCars error: Error)
+    func interactor(didFindCar car: Car, category: Category)
 }
 
 class CategorizedCarListPresenterImplementation: CategorizedCarListPresenter {
@@ -21,5 +22,9 @@ class CategorizedCarListPresenterImplementation: CategorizedCarListPresenter {
     
     func interactor(didFailRetrieveCars error: Error) {
         
+    }
+    
+    func interactor(didFindCar car: Car, category: Category) {
+        viewController?.presenter(didObtainCarId: car.id, category: category)
     }
 }

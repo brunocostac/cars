@@ -10,6 +10,7 @@ import UIKit
 
 protocol CategorizedCarListPresenterOutput: AnyObject {
     func presenter(didRetrieveCars cars: [Car])
+    func presenter(didObtainCarId id: Int, category: Category)
 }
 
 class CategorizedCarListViewController: UIViewController {
@@ -36,6 +37,11 @@ class CategorizedCarListViewController: UIViewController {
 }
 
 extension CategorizedCarListViewController: CategorizedCarListPresenterOutput {
+    func presenter(didObtainCarId id: Int, category: Category) {
+        self.router?.navigationController = self.navigationController
+        self.router?.routeToDetail(with: id, category: category)
+    }
+    
     func presenter(didRetrieveCars cars: [Car]) {
         self.cars = cars
         DispatchQueue.main.async {
@@ -56,5 +62,9 @@ extension CategorizedCarListViewController: UITableViewDelegate, UITableViewData
         
         cell.configure(title: cars[indexPath.row].name, imageURL: cars[indexPath.row].url_image, price: cars[indexPath.row].price)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.interactor?.didSelectRow(at: indexPath.row)
     }
 }

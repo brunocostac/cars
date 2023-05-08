@@ -10,6 +10,7 @@ import Foundation
 protocol CategorizedCarListInteractor: AnyObject {
     var selectedCategory: Category? { get set }
     func viewDidAppear()
+    func didSelectRow(at index: Int)
     func getCars(at category: Category)
 }
 
@@ -37,6 +38,12 @@ class CategorizedCarListInteractorImplementation: CategorizedCarListInteractor {
             }
         } catch {
             self.presenter?.interactor(didFailRetrieveCars: error)
+        }
+    }
+    
+    func didSelectRow(at index: Int) {
+        if self.cars.indices.contains(index) {
+            self.presenter?.interactor(didFindCar: self.cars[index], category: selectedCategory!)
         }
     }
 }

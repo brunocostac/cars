@@ -75,20 +75,5 @@ class CarListInteractorImplementation: CarListInteractor {
     func didSelectCategory(at category: Int) {
         self.selectedCategory = Category(rawValue: category)!
         self.presenter?.interactor(didSelectCategory: self.selectedCategory)
-        
-        
-        //vai pro interactor de categorizedcarlist
-        /*do {
-            self.carsService.getCars(with: self.selectedCategory!) { result in
-                switch result {
-                case .success(let cars):
-                    self.cars = cars
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        } catch {
-            self.presenter?.interactor(didFailRetrieveCars: error)
-        }*/
     }
 }
