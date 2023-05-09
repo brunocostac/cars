@@ -59,7 +59,7 @@ extension CategorizedCarListViewController: UITableViewDelegate, UITableViewData
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategorizedCarTableViewCell", for: indexPath) as? CategorizedCarTableViewCell else {
             return UITableViewCell()
         }
-        
+        cell.selectionStyle = .none 
         cell.configure(title: cars[indexPath.row].name, imageURL: cars[indexPath.row].url_image, price: cars[indexPath.row].price)
         return cell
     }

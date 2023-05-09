@@ -41,8 +41,9 @@ extension CarDetailViewController: CarDetailPresenterOutput {
         DispatchQueue.main.async {
           self.title = car.name
         }
-        carDetailView?.updateLabel(with: car.name)
+        carDetailView?.updateLabels(with: car.name, desc: car.desc)
         carDetailView?.updateImage(imageURL: car.url_image)
+        carDetailView?.updateMapRegionAndAnnotation(car: car)
     }
     
     func presenter(didFailRetrieveItem message: String) {

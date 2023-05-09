@@ -32,7 +32,15 @@ class CategorizedCarTableViewCell: UITableViewCell {
        return carImageView
     }()
     
+    let stackView: UIStackView = {
+       let stackView = UIStackView()
+       stackView.translatesAutoresizingMaskIntoConstraints = false
+       stackView.axis = .horizontal
+       stackView.spacing = 10 // Set spacing between labels
+       return stackView
+    }()
     
+ 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -52,27 +60,30 @@ class CategorizedCarTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
-        addSubview(carImageView)
-        addSubview(carNameLabel)
-        addSubview(carPriceLabel)
-        
         self.separatorInset = .zero
+        addSubview(carImageView)
+        addSubview(stackView)
+        stackView.addArrangedSubview(carNameLabel)
+        stackView.addArrangedSubview(carPriceLabel)
+
         NSLayoutConstraint.activate([
             carImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             carImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             carImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             carImageView.heightAnchor.constraint(equalToConstant: 140),
             
-            carNameLabel.topAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: 0),
-            carNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+            stackView.topAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
+        
     }
     
     
     func configure(title: String, imageURL: URL, price: String) {
         
         self.carNameLabel.text = title
-        //self.carPriceLabel.text = price
+        self.carPriceLabel.text = "$ \(price)"
         
         URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
             if let error = error {
