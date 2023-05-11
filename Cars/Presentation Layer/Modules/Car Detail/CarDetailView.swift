@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import SDWebImage
 
 class CarDetailView: UIView {
     
@@ -94,19 +95,10 @@ class CarDetailView: UIView {
     }
     
     public func updateImage(imageURL: URL) {
-        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            } else if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.imageView.image = image
-                }
-            }
-        }.resume()
+        self.imageView.sd_setImage(with: imageURL)
     }
     
     func updateMapRegionAndAnnotation(car: Car) {
-        let zoomLevel = 0.005
         let latitude = Double(car.latitude)!
         let longitude = Double(car.longitude)!
         let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

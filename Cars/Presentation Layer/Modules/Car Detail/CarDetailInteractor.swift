@@ -9,7 +9,7 @@ import Foundation
 
 protocol CarDetailInteractor: AnyObject {
     var carId: Int? { get }
-    func viewDidLoad()
+    func viewWillAppear()
 }
 
 class CarDetailInteractorImplementation: CarDetailInteractor {
@@ -20,10 +20,10 @@ class CarDetailInteractorImplementation: CarDetailInteractor {
     
     private let carService = CarsServiceImplementation()
     
-    func viewDidLoad() {
+    func viewWillAppear() {
         
         do {
-            let car = try carService.getCar(with: self.carId!, category: self.category!) { result in
+            self.carService.getCar(with: self.carId!, category: self.category!) { result in
                 switch result {
                 case .success(let car):
                     self.presenter?.interactor(didRetrieveCar: car!)

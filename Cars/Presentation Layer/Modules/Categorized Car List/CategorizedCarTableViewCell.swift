@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CategorizedCarTableViewCell: UITableViewCell {
-    
+
     let carNameLabel: UILabel = {
         let carNameLabel = UILabel()
         carNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +66,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
         addSubview(stackView)
         stackView.addArrangedSubview(carNameLabel)
         stackView.addArrangedSubview(carPriceLabel)
-
+        
         NSLayoutConstraint.activate([
             carImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             carImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
@@ -76,23 +77,11 @@ class CategorizedCarTableViewCell: UITableViewCell {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
-        
     }
     
-    
     func configure(title: String, imageURL: URL, price: String) {
-        
         self.carNameLabel.text = title
         self.carPriceLabel.text = "$ \(price)"
-        
-        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            } else if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.carImageView.image = image
-                }
-            }
-        }.resume()
+        self.carImageView.sd_setImage(with: imageURL)
     }
 }

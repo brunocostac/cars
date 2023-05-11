@@ -9,7 +9,8 @@ import Foundation
 
 
 protocol CarListInteractor: AnyObject {
-    func viewDidAppear()
+    func initializeData()
+    func reloadData()
     func didSelectRow(at index: Int)
     func didSelectCategory(at category: Int)
     func getCars(with: Category)
@@ -22,10 +23,15 @@ class CarListInteractorImplementation: CarListInteractor {
     private var cars: [Car] = []
     private var selectedCategory: Category = Category.newCars
     
-    func viewDidAppear()  {
+    func initializeData()  {
+        self.selectedCategory = Category.newCars
         self.getSelectedCategoryName()
         self.getCars(with: selectedCategory)
         self.getCategories()
+    }
+    
+    func reloadData() {
+        self.initializeData()
     }
     
     func getSelectedCategoryName() {
@@ -44,7 +50,7 @@ class CarListInteractorImplementation: CarListInteractor {
         let sportsCategory = ["id": Category.sports.id, "name": Category.sports.name, "image_url": "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/Audi_Spyder.png"] as [String : Any]
         categories.append(sportsCategory)
         
-        let newCarsCategory = ["id": Category.newCars.id, "name": Category.newCars.name, "image_url": "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/Audi_Spyder.png"] as [String : Any]
+        let newCarsCategory = ["id": Category.newCars.id, "name": Category.newCars.name, "image_url": "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/luxo/Lexus_LFA.png"] as [String : Any]
         categories.append(newCarsCategory)
         
         self.presenter?.interactor(didRetrieveCategories: categories)

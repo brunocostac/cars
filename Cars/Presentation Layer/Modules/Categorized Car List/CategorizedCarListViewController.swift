@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 protocol CategorizedCarListPresenterOutput: AnyObject {
     func presenter(didRetrieveCars cars: [Car])
     func presenter(didObtainCarId id: Int, category: Category)
@@ -27,12 +26,16 @@ class CategorizedCarListViewController: UIViewController {
         self.categorizedCarsView?.tableView.dataSource = self
         self.categorizedCarsView?.tableView.delegate = self
         self.categorizedCarsView?.tableView.register(CategorizedCarTableViewCell.self, forCellReuseIdentifier: "CategorizedCarTableViewCell")
+        self.interactor?.selectedCategory = self.selectedCategory
+        self.interactor?.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.interactor?.selectedCategory = self.selectedCategory
-        self.interactor?.viewDidAppear()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.cars = []
     }
 }
 
@@ -44,13 +47,14 @@ extension CategorizedCarListViewController: CategorizedCarListPresenterOutput {
     
     func presenter(didRetrieveCars cars: [Car]) {
         self.cars = cars
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
             self.categorizedCarsView?.tableView.reloadData()
-        }
+        })
     }
 }
 
 extension CategorizedCarListViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cars.count
     }

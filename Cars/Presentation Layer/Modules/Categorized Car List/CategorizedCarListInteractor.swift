@@ -9,7 +9,7 @@ import Foundation
 
 protocol CategorizedCarListInteractor: AnyObject {
     var selectedCategory: Category? { get set }
-    func viewDidAppear()
+    func viewDidLoad()
     func didSelectRow(at index: Int)
     func getCars(at category: Category)
 }
@@ -21,7 +21,7 @@ class CategorizedCarListInteractorImplementation: CategorizedCarListInteractor {
     private let carsService = CarsServiceImplementation()
     private var cars: [Car] = []
     
-    func viewDidAppear()  {
+    func viewDidLoad()  {
         self.getCars(at: selectedCategory!)
     }
     

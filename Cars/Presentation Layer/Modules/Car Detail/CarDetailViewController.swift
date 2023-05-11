@@ -27,11 +27,11 @@ class CarDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.interactor?.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.interactor?.viewWillAppear()
     }
 }
 

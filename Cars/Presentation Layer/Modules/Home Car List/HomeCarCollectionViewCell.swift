@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeCarCollectionViewCell: UICollectionViewCell {
 
@@ -27,19 +28,8 @@ class HomeCarCollectionViewCell: UICollectionViewCell {
     
     public func updateImage(imageURL: URL) {
         activityIndicator.startAnimating()
-    
-        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-            }
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            } else if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.carImage.image = image
-                }
-            }
-        }.resume()
+        self.carImage.sd_setImage(with: imageURL)
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
     }
 }

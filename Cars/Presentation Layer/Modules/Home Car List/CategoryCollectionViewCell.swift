@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CategoryCollectionViewCell: UICollectionViewCell {
    
@@ -24,17 +25,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     public func updateImage(imageURL: String) {
-
-        let image_URL = URL(string: imageURL)!
-        
-        URLSession.shared.dataTask(with: image_URL) { (data, response, error) in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            } else if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.imageView.image = image
-                }
-            }
-        }.resume()
+        self.imageView.sd_setImage(with: URL(string: imageURL))
     }
 }

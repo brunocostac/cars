@@ -39,16 +39,17 @@ class CarListViewController: UIViewController {
         carsView?.categoryCollectionView.delegate = self
         carsView?.categoryCollectionView.dataSource = self
         carsView?.categoryCollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+        self.interactor?.initializeData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        self.interactor?.viewDidAppear()
+    override func viewDidDisappear(_ animated: Bool) {
+        self.cars = []
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Home"
+        self.interactor?.reloadData()
     }
 }
 
@@ -132,8 +133,8 @@ extension CarListViewController: UICollectionViewDelegate, UICollectionViewDataS
             let itemHeight = itemWidth * 0.8
             return CGSize(width: itemWidth, height: itemHeight)
         } else {
-            let minimumInteritemSpacing = 9
-            let optimisedWidth = (Int(collectionView.frame.width) - minimumInteritemSpacing) / 2
+            let minimumInteritemSpacing = 5
+            let optimisedWidth = (Int(collectionView.frame.size.width - 20) - minimumInteritemSpacing) / 2
             return CGSize(width: optimisedWidth , height: optimisedWidth)
         }
     }

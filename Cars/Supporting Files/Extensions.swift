@@ -92,3 +92,15 @@ extension UICollectionView {
         self.backgroundView = emptyView
     }
 }
+
+extension UINavigationBar {
+    
+    static func setGlobalAppearance() {
+        UINavigationBar.appearance().tintColor = UIColor.red
+        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().backIndicatorImage = UIImage(named: "back_arrow")
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "back_arrow")
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
+    }
+}
