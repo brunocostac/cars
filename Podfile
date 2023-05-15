@@ -6,6 +6,6 @@ target 'Cars' do
   use_frameworks!
   # Pods for Cars
   pod 'SDWebImage'
-  
+  pod 'SkeletonView'
 
 end

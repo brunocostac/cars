@@ -10,6 +10,16 @@ import UIKit
 class CarListView: UIView {
     
     // MARK: - Properties
+    lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView()
+        spinner.hidesWhenStopped = true
+        spinner.backgroundColor = .yellow
+        spinner.color = .red
+        spinner.style = .large
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Avenir", size: 25)
@@ -81,10 +91,16 @@ extension CarListView {
             overrideUserInterfaceStyle = .light
         }
         self.backgroundColor =  UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        self.addSubview(spinner)
         self.addSubview(categoryLabel)
         self.addSubview(categoryCollectionView)
         self.addSubview(titleLabel)
         self.addSubview(carCollectionView)
+        
+        NSLayoutConstraint.activate([
+            self.spinner.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.spinner.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
         
         NSLayoutConstraint.activate([
             categoryLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),

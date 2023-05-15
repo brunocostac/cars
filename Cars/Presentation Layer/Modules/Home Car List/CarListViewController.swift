@@ -31,14 +31,7 @@ class CarListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = carsView
-        carsView?.carCollectionView.delegate = self
-        carsView?.carCollectionView.dataSource = self
-        carsView?.carCollectionView.register(UINib(nibName: "HomeCarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeCarCollectionViewCell")
-        
-        carsView?.categoryCollectionView.delegate = self
-        carsView?.categoryCollectionView.dataSource = self
-        carsView?.categoryCollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+        self.initializeCollectionViews()
         self.interactor?.initializeData()
     }
     
@@ -46,10 +39,21 @@ class CarListViewController: UIViewController {
         self.cars = []
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.navigationItem.title = "Home"
         self.interactor?.reloadData()
+    }
+    
+    func initializeCollectionViews() {
+        self.view = carsView
+        self.carsView?.carCollectionView.delegate = self
+        self.carsView?.carCollectionView.dataSource = self
+        self.carsView?.carCollectionView.register(UINib(nibName: "HomeCarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeCarCollectionViewCell")
+        
+        self.carsView?.categoryCollectionView.delegate = self
+        self.carsView?.categoryCollectionView.dataSource = self
+        self.carsView?.categoryCollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
     }
 }
 
@@ -96,12 +100,12 @@ extension CarListViewController: UICollectionViewDelegate, UICollectionViewDataS
         if collectionView.tag == 1 {
             return categories.count
         } else {
-            if cars.count == 0 && carsRetrieved {
-                carsView?.carCollectionView.setEmptyView(title: "No cars were found.", message: "", messageImage: UIImage(systemName: "magnifyingglass.circle")!)
+            if self.cars.count == 0 && carsRetrieved {
+                self.carsView?.carCollectionView.setEmptyView(title: "No cars were found.", message: "", messageImage: UIImage(systemName: "magnifyingglass.circle")!)
             } else {
-                carsView?.carCollectionView.backgroundView = nil
+                self.carsView?.carCollectionView.backgroundView = nil
             }
-            return cars.count
+            return self.cars.count
         }
     }
     

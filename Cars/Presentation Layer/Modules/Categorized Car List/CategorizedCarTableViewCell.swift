@@ -15,6 +15,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
         carNameLabel.translatesAutoresizingMaskIntoConstraints = false
         carNameLabel.font = UIFont(name: "Avenir", size: 20)
         carNameLabel.textColor = .black
+        carNameLabel.isSkeletonable = true
         return carNameLabel
     }()
     
@@ -23,6 +24,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
         carPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         carPriceLabel.font = UIFont(name: "Avenir", size: 14)
         carPriceLabel.textColor = .darkGray
+        carPriceLabel.isSkeletonable = true
         return carPriceLabel
     }()
     
@@ -30,6 +32,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
        let carImageView = UIImageView()
        carImageView.translatesAutoresizingMaskIntoConstraints = false
        carImageView.contentMode = .scaleAspectFit
+       carImageView.isSkeletonable = true
        return carImageView
     }()
     
@@ -38,13 +41,13 @@ class CategorizedCarTableViewCell: UITableViewCell {
        stackView.translatesAutoresizingMaskIntoConstraints = false
        stackView.axis = .horizontal
        stackView.spacing = 10 // Set spacing between labels
+       stackView.isSkeletonable = true
        return stackView
     }()
     
- 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        self.isSkeletonable = true
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: 0.5)
         self.layer.shadowRadius = 1
@@ -62,8 +65,8 @@ class CategorizedCarTableViewCell: UITableViewCell {
     
     func setupUI() {
         self.separatorInset = .zero
-        addSubview(carImageView)
-        addSubview(stackView)
+        contentView.addSubview(carImageView)
+        contentView.addSubview(stackView)
         stackView.addArrangedSubview(carNameLabel)
         stackView.addArrangedSubview(carPriceLabel)
         
@@ -78,7 +81,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
     }
-    
+   
     func configure(title: String, imageURL: URL, price: String) {
         self.carNameLabel.text = title
         self.carPriceLabel.text = "$ \(price)"

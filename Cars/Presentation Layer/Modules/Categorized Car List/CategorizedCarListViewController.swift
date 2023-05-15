@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 protocol CategorizedCarListPresenterOutput: AnyObject {
     func presenter(didRetrieveCars cars: [Car])
@@ -24,18 +25,15 @@ class CategorizedCarListViewController: UIViewController {
         title = "Categories"
         view = categorizedCarsView
         self.categorizedCarsView?.tableView.dataSource = self
-        self.categorizedCarsView?.tableView.delegate = self
         self.categorizedCarsView?.tableView.register(CategorizedCarTableViewCell.self, forCellReuseIdentifier: "CategorizedCarTableViewCell")
         self.interactor?.selectedCategory = self.selectedCategory
         self.interactor?.viewDidLoad()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        self.cars = []
+        self.categorizedCarsView?.tableView.isSkeletonable = true
+        self.categorizedCarsView?.tableView.showAnimatedGradientSkeleton()
     }
 }
 
@@ -47,13 +45,22 @@ extension CategorizedCarListViewController: CategorizedCarListPresenterOutput {
     
     func presenter(didRetrieveCars cars: [Car]) {
         self.cars = cars
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+        DispatchQueue.main.async {
+            self.view.showAnimatedGradientSkeleton()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.categorizedCarsView?.tableView.stopSkeletonAnimation()
+            self.categorizedCarsView?.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
             self.categorizedCarsView?.tableView.reloadData()
-        })
+        }
     }
 }
 
-extension CategorizedCarListViewController: UITableViewDelegate, UITableViewDataSource {
+extension CategorizedCarListViewController: SkeletonTableViewDataSource, SkeletonTableViewDelegate {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "CategorizedCarTableViewCell"
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cars.count
@@ -63,8 +70,9 @@ extension CategorizedCarListViewController: UITableViewDelegate, UITableViewData
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategorizedCarTableViewCell", for: indexPath) as? CategorizedCarTableViewCell else {
             return UITableViewCell()
         }
-        cell.selectionStyle = .none 
-        cell.configure(title: cars[indexPath.row].name, imageURL: cars[indexPath.row].url_image, price: cars[indexPath.row].price)
+        
+        cell.selectionStyle = .none
+        cell.configure(title: self.cars[indexPath.row].name, imageURL: self.cars[indexPath.row].url_image, price: self.cars[indexPath.row].price)
         return cell
     }
     
@@ -72,3 +80,4 @@ extension CategorizedCarListViewController: UITableViewDelegate, UITableViewData
         self.interactor?.didSelectRow(at: indexPath.row)
     }
 }
+
