@@ -9,8 +9,7 @@ import UIKit
 import SDWebImage
 
 class HomeCarCollectionViewCell: UICollectionViewCell {
-
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var carImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
@@ -27,9 +26,6 @@ class HomeCarCollectionViewCell: UICollectionViewCell {
     }
     
     public func updateImage(imageURL: URL) {
-        activityIndicator.startAnimating()
         self.carImage.sd_setImage(with: imageURL)
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.isHidden = true
     }
 }

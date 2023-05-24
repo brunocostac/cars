@@ -48,6 +48,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.isSkeletonable = true
+        self.isUserInteractionEnabled = true
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: 0.5)
         self.layer.shadowRadius = 1
@@ -64,7 +65,6 @@ class CategorizedCarTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
-        self.separatorInset = .zero
         contentView.addSubview(carImageView)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(carNameLabel)
@@ -78,7 +78,8 @@ class CategorizedCarTableViewCell: UITableViewCell {
             
             stackView.topAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8)
         ])
     }
    

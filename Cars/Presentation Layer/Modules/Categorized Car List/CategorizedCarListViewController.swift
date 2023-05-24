@@ -20,20 +20,26 @@ class CategorizedCarListViewController: UIViewController {
     var router: CategorizedCarListRouter?
     private var cars: [Car] = []
     
+    override func loadView() {
+        view = categorizedCarsView
+        title = "Categories"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Categories"
-        view = categorizedCarsView
+        self.categorizedCarsView?.tableView.delegate = self
         self.categorizedCarsView?.tableView.dataSource = self
         self.categorizedCarsView?.tableView.register(CategorizedCarTableViewCell.self, forCellReuseIdentifier: "CategorizedCarTableViewCell")
         self.interactor?.selectedCategory = self.selectedCategory
         self.interactor?.viewDidLoad()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.categorizedCarsView?.tableView.isSkeletonable = true
-        self.categorizedCarsView?.tableView.showAnimatedGradientSkeleton()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.categorizedCarsView?.tableView.stopSkeletonAnimation()
+            self.categorizedCarsView?.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+            self.categorizedCarsView?.tableView.reloadData()
+        }
     }
 }
 
@@ -47,12 +53,6 @@ extension CategorizedCarListViewController: CategorizedCarListPresenterOutput {
         self.cars = cars
         DispatchQueue.main.async {
             self.view.showAnimatedGradientSkeleton()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.categorizedCarsView?.tableView.stopSkeletonAnimation()
-            self.categorizedCarsView?.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-            self.categorizedCarsView?.tableView.reloadData()
         }
     }
 }
@@ -71,7 +71,6 @@ extension CategorizedCarListViewController: SkeletonTableViewDataSource, Skeleto
             return UITableViewCell()
         }
         
-        cell.selectionStyle = .none
         cell.configure(title: self.cars[indexPath.row].name, imageURL: self.cars[indexPath.row].url_image, price: self.cars[indexPath.row].price)
         return cell
     }

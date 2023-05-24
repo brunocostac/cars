@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 protocol CarListPresenterOutput: AnyObject {
     func presenter(didRetrieveCars cars: [Car])
@@ -29,24 +30,40 @@ class CarListViewController: UIViewController {
     
     // MARK: - Lifecycle Methods
     
+    override func loadView() {
+        self.view = carsView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initializeCollectionViews()
         self.interactor?.initializeData()
+        self.carsView?.setupSkeleton()
+        self.showAnimatedGradientInView()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        self.cars = []
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationItem.title = "Home"
-        self.interactor?.reloadData()
+        self.refreshCollectionsWithDelay()
+    }
+    
+    func showAnimatedGradientInView() {
+        DispatchQueue.main.async {
+            self.view.showAnimatedGradientSkeleton()
+        }
+    }
+    
+    func refreshCollectionsWithDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.carsView?.categoryCollectionView.stopSkeletonAnimation()
+            self.carsView?.categoryCollectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+            self.carsView?.categoryCollectionView.reloadData()
+            
+            self.carsView?.carCollectionView.stopSkeletonAnimation()
+            self.carsView?.carCollectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+            self.carsView?.carCollectionView.reloadData()
+        }
     }
     
     func initializeCollectionViews() {
-        self.view = carsView
         self.carsView?.carCollectionView.delegate = self
         self.carsView?.carCollectionView.dataSource = self
         self.carsView?.carCollectionView.register(UINib(nibName: "HomeCarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeCarCollectionViewCell")
@@ -55,6 +72,7 @@ class CarListViewController: UIViewController {
         self.carsView?.categoryCollectionView.dataSource = self
         self.carsView?.categoryCollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
     }
+    
 }
 
 // MARK: - Presenter Output
@@ -62,16 +80,15 @@ extension CarListViewController: CarListPresenterOutput {
     func presenter(didSelectCategory category: Category) {
         self.router?.routeToCategorizedCarList(category: category)
     }
-    
+
     func presenter(didRetrieveCategories categories: [[String : Any]]) {
         self.categories = categories
-        self.carsView?.reloadCategoriesCollectionView()
     }
-    
+
     func presenter(didRetrieveCars cars: [Car]) {
         self.carsRetrieved = true
         self.cars = cars
-        self.carsView?.reloadCarCollectionView()
+       
     }
     
     func presenter(didRetrieveCategoryName name: String) {
@@ -95,7 +112,8 @@ extension CarListViewController: CarListPresenterOutput {
 }
 
 // MARK: - UITableView DataSource & Delegate
-extension CarListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+extension CarListViewController: SkeletonCollectionViewDelegate, SkeletonCollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1 {
             return categories.count
@@ -109,11 +127,20 @@ extension CarListViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
     }
     
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> SkeletonView.ReusableCellIdentifier {
+        if skeletonView.tag == 1 {
+            return "CategoryCollectionViewCell"
+        } else {
+           return "HomeCarCollectionViewCell"
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.tag == 1 {
             guard let categoryCell = self.carsView?.categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as? CategoryCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            
             categoryCell.updateImage(imageURL: self.categories[indexPath.row]["image_url"] as! String)
             categoryCell.titleLabel.text = self.categories[indexPath.row]["name"] as? String
             

@@ -27,22 +27,30 @@
                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="useFontLineHeight" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="$ 5000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-DG-QTk">
                                         <rect key="frame" x="0.0" y="32.333333333333343" width="45.666666666666664" height="27.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="useFontLineHeight" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="rSG-XZ-c3v" secondAttribute="trailing" id="at6-Ea-X5g"/>
                                     <constraint firstItem="rSG-XZ-c3v" firstAttribute="leading" secondItem="DRd-FB-5JB" secondAttribute="leading" id="xhg-Jt-Yrh"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </stackView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="C1m-dZ-riK">
-                                <rect key="frame" x="0.0" y="42" width="168" height="20"/>
-                            </activityIndicatorView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Ff-NM-gDw">
                                 <rect key="frame" x="0.0" y="8" width="168" height="80"/>
                                 <constraints>
@@ -52,20 +60,18 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="C1m-dZ-riK" firstAttribute="top" secondItem="imm-Ka-A8l" secondAttribute="top" constant="42" id="0Ey-fm-wsa"/>
                             <constraint firstAttribute="trailing" secondItem="DRd-FB-5JB" secondAttribute="trailing" constant="8" id="Jg1-EU-QAK"/>
-                            <constraint firstItem="C1m-dZ-riK" firstAttribute="leading" secondItem="imm-Ka-A8l" secondAttribute="leading" id="NYF-DF-HeP"/>
                             <constraint firstItem="DRd-FB-5JB" firstAttribute="top" secondItem="1Ff-NM-gDw" secondAttribute="bottom" constant="16" id="Vcp-Is-Vlo"/>
                             <constraint firstAttribute="trailing" secondItem="1Ff-NM-gDw" secondAttribute="trailing" id="WfG-Zl-T8F"/>
                             <constraint firstItem="1Ff-NM-gDw" firstAttribute="leading" secondItem="imm-Ka-A8l" secondAttribute="leading" id="daj-Gh-EKt"/>
                             <constraint firstItem="DRd-FB-5JB" firstAttribute="leading" secondItem="imm-Ka-A8l" secondAttribute="leading" constant="8" id="oij-LV-2y0"/>
                             <constraint firstAttribute="bottom" secondItem="DRd-FB-5JB" secondAttribute="bottom" constant="4" id="r2L-rB-q82"/>
-                            <constraint firstAttribute="trailing" secondItem="C1m-dZ-riK" secondAttribute="trailing" id="x5P-bb-xCi"/>
                             <constraint firstItem="1Ff-NM-gDw" firstAttribute="top" secondItem="imm-Ka-A8l" secondAttribute="top" constant="8" id="z7b-vn-Q1V"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -73,6 +79,7 @@
                                 <integer key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
@@ -82,10 +89,15 @@
                     <constraint firstAttribute="bottom" secondItem="imm-Ka-A8l" secondAttribute="bottom" constant="16" id="MSj-nX-IEU"/>
                     <constraint firstItem="imm-Ka-A8l" firstAttribute="leading" secondItem="Dpa-nr-TIu" secondAttribute="leading" constant="16" id="RrJ-k0-ZJX"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                </userDefinedRuntimeAttributes>
             </collectionViewCellContentView>
             <size key="customSize" width="405" height="116"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="activityIndicator" destination="C1m-dZ-riK" id="pRf-nN-hMK"/>
                 <outlet property="carImage" destination="1Ff-NM-gDw" id="HuM-Fu-OX2"/>
                 <outlet property="descLabel" destination="dJ5-DG-QTk" id="Iab-ZN-jT2"/>
                 <outlet property="nameLabel" destination="rSG-XZ-c3v" id="zcf-oi-tmA"/>

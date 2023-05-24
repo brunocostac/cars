@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class CategorizedCarListView: UIView {
     
@@ -44,5 +45,10 @@ class CategorizedCarListView: UIView {
             self.tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             self.tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ])
+    }
+    
+    func setupSkeleton() {
+        self.tableView.isSkeletonable = true
+        self.tableView.showAnimatedGradientSkeleton()
     }
 }
