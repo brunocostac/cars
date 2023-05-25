@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import SkeletonView
 
 class HomeCarCollectionViewCell: UICollectionViewCell {
     
@@ -23,6 +24,20 @@ class HomeCarCollectionViewCell: UICollectionViewCell {
         self.layer.masksToBounds = false
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
+    }
+    func startAnimation() {
+        [nameLabel, descLabel].forEach {
+            $0?.showAnimatedSkeleton()
+       }
+        carImage.showAnimatedSkeleton()
+    }
+    
+    func hideAnimation() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.carImage.hideSkeleton()
+            self.nameLabel.hideSkeleton()
+            self.descLabel.hideSkeleton()
+        }
     }
     
     public func updateImage(imageURL: URL) {

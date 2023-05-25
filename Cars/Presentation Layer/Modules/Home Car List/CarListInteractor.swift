@@ -57,6 +57,7 @@ class CarListInteractorImplementation: CarListInteractor {
     }
     
     func getCars(with category: Category) {
+        
         do {
             self.carsService.getCars(with: category) { result in
                 switch result {

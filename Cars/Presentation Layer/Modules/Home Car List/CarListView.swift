@@ -34,6 +34,7 @@ class CarListView: UIView {
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor =  UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        cv.isSkeletonable = true
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.tag = 1
         return cv
@@ -44,6 +45,8 @@ class CarListView: UIView {
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor =  UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
+        cv.backgroundView = nil
+        cv.isSkeletonable = true
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.tag = 2
         return cv
@@ -56,43 +59,8 @@ class CarListView: UIView {
         setupUI()
     }
     
-    func setupSkeleton() {
-        DispatchQueue.main.async {
-            self.isSkeletonable = true
-            self.carCollectionView.backgroundView = nil
-            self.carCollectionView.isSkeletonable = true
-            self.categoryCollectionView.isSkeletonable = true
-        }
-    }
-    
-    func stopCarCollectionSkeleton() {
-        DispatchQueue.main.async {
-            self.carCollectionView.stopSkeletonAnimation()
-            self.carCollectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-        }
-    }
-    
-    func stopCategoryCollectionSkeleton() {
-        DispatchQueue.main.async {
-            self.categoryCollectionView.stopSkeletonAnimation()
-            self.categoryCollectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-        }
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    public func reloadCategoriesCollectionView() {
-        DispatchQueue.main.async {
-            self.categoryCollectionView.reloadData()
-        }
-    }
-    
-    public func reloadCarCollectionView() {
-        DispatchQueue.main.async {
-            self.carCollectionView.reloadData()
-        }
     }
 }
 

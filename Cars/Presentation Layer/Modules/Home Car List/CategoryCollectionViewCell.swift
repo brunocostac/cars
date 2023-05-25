@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import SkeletonView
 
 class CategoryCollectionViewCell: UICollectionViewCell {
    
@@ -22,6 +23,18 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         self.layer.masksToBounds = false
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
+    }
+    
+    func startAnimation() {
+        self.imageView.showAnimatedSkeleton()
+        self.titleLabel.showAnimatedSkeleton()
+    }
+    
+    func hideAnimation() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.imageView.hideSkeleton()
+            self.titleLabel.hideSkeleton()
+        }
     }
     
     public func updateImage(imageURL: String) {

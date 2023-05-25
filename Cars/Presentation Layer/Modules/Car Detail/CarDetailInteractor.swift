@@ -23,12 +23,14 @@ class CarDetailInteractorImplementation: CarDetailInteractor {
     func viewWillAppear() {
         
         do {
-            self.carService.getCar(with: self.carId!, category: self.category!) { result in
-                switch result {
-                case .success(let car):
-                    self.presenter?.interactor(didRetrieveCar: car!)
-                case .failure(let error):
-                    print(error)
+            if let carId = self.carId, let category = self.category {
+                self.carService.getCar(with: carId, category: category) { result in
+                    switch result {
+                    case .success(let car):
+                        self.presenter?.interactor(didRetrieveCar: car!)
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
             }
         } catch {
