@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import SDWebImage
+import SkeletonView
 
 class CarDetailView: UIView {
     
@@ -24,13 +25,15 @@ class CarDetailView: UIView {
     lazy var contentView: UIView = {
        let view = UIView()
        view.translatesAutoresizingMaskIntoConstraints = false
+       view.isSkeletonable = true
        return view
     }()
     
     lazy var imageView: UIImageView = {
        let image = UIImageView()
-       image.translatesAutoresizingMaskIntoConstraints = false
        image.contentMode = .scaleAspectFit
+       image.isSkeletonable = true
+       image.translatesAutoresizingMaskIntoConstraints = false
        return image
     }()
     
@@ -38,7 +41,9 @@ class CarDetailView: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30)
         label.textColor = .darkGray
+        label.text = "Lorem ipsum dolor sit amet"
         label.numberOfLines = 0
+        label.isSkeletonable = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -48,7 +53,9 @@ class CarDetailView: UIView {
         label.font = .systemFont(ofSize: 18)
         label.textAlignment = .left
         label.textColor = .lightGray
+        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non mollis quam. Proin eu odio eleifend, dictum metus nec, iaculis nunc. Vestibulum in congue sem. Aliquam erat volutpat. Vivamus tortor felis, efficitur sed mi vitae, luctus hendrerit felis."
         label.numberOfLines = 0
+        label.isSkeletonable = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -59,6 +66,7 @@ class CarDetailView: UIView {
         label.font = .systemFont(ofSize: 30)
         label.textColor = .darkGray
         label.numberOfLines = 0
+        label.isSkeletonable = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -71,6 +79,7 @@ class CarDetailView: UIView {
         mapView.layer.borderColor = UIColor.systemGray4.cgColor
         mapView.layer.masksToBounds = false
         mapView.clipsToBounds = true
+        mapView.isSkeletonable = true
         mapView.translatesAutoresizingMaskIntoConstraints = false
         return mapView
     }()
@@ -80,6 +89,7 @@ class CarDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        self.isSkeletonable = true
     }
     
     required init?(coder: NSCoder) {

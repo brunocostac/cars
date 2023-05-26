@@ -46,9 +46,4 @@ class CategorizedCarListView: UIView {
             self.tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ])
     }
-    
-    func setupSkeleton() {
-        self.tableView.isSkeletonable = true
-        self.tableView.showAnimatedGradientSkeleton()
-    }
 }

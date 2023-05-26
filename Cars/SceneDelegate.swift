@@ -10,15 +10,32 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let vc = CarListViewController()
-        let navigationController = UINavigationController(rootViewController: vc)
-        CarListConfigurator.configureModule(viewController: vc)
-        window?.rootViewController = navigationController
+       
+        let tabBarController = CustomUITabBarController()
+        
+        let carListViewController = CarListViewController()
+        carListViewController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 0)
+        
+        let navigationController = UINavigationController(rootViewController: carListViewController)
+        CarListConfigurator.configureModule(viewController: carListViewController)
+      
+        
+        let secondViewController = UIViewController()
+        secondViewController.view.backgroundColor = .white
+        secondViewController.tabBarItem = UITabBarItem(title: "Categories", image: UIImage(systemName: "list.bullet.indent"), tag: 1)
+        
+        let thirdViewController = UIViewController()
+        thirdViewController.view.backgroundColor = .white
+        thirdViewController.tabBarItem = UITabBarItem(title: "Garage", image: UIImage(systemName: "heart"), tag: 2)
+        
+        tabBarController.viewControllers = [navigationController, secondViewController, thirdViewController]
+        
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
 

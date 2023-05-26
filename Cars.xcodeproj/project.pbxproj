@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110A08932A20E1B6001A18E3 /* CustomUITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110A08922A20E1B6001A18E3 /* CustomUITabBarController.swift */; };
 		114BC67629F0291C001A401F /* HomeCarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114BC67429F0291B001A401F /* HomeCarCollectionViewCell.swift */; };
 		114BC67929F08905001A401F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114BC67829F08904001A401F /* Category.swift */; };
 		114D7BF929EDC2CA00BC1888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7BF829EDC2CA00BC1888 /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		052C3DCB08F581B323734AF4 /* Pods_Cars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		110A08922A20E1B6001A18E3 /* CustomUITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUITabBarController.swift; sourceTree = "<group>"; };
 		114BC67429F0291B001A401F /* HomeCarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCarCollectionViewCell.swift; sourceTree = "<group>"; };
 		114BC67829F08904001A401F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		114D7BF529EDC2CA00BC1888 /* Cars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cars.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +205,7 @@
 				114D7C0129EDC2CE00BC1888 /* Assets.xcassets */,
 				114D7C0329EDC2CE00BC1888 /* LaunchScreen.storyboard */,
 				114D7C1A29EDDE9C00BC1888 /* Extensions.swift */,
+				110A08922A20E1B6001A18E3 /* CustomUITabBarController.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -235,7 +238,6 @@
 				D7DC894D271936B99CC3925E /* Pods-Cars.debug.xcconfig */,
 				8D1051F53680DC8E24F2C3F4 /* Pods-Cars.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -369,6 +371,7 @@
 				11923F632A02DDD7002D2223 /* CategorizedCarListPresenter.swift in Sources */,
 				114D7BFB29EDC2CA00BC1888 /* SceneDelegate.swift in Sources */,
 				114D7C3329EDDF9A00BC1888 /* CarListViewController.swift in Sources */,
+				110A08932A20E1B6001A18E3 /* CustomUITabBarController.swift in Sources */,
 				11AE0E7F29FB271100B21C1A /* CategoryCollectionViewCell.swift in Sources */,
 				114BC67929F08905001A401F /* Category.swift in Sources */,
 				11923F612A02DD6E002D2223 /* CategorizedCarListInteractor.swift in Sources */,
@@ -526,8 +529,7 @@
 				INFOPLIST_FILE = Cars/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -554,8 +556,7 @@
 				INFOPLIST_FILE = Cars/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

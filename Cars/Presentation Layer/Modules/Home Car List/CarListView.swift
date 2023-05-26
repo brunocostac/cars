@@ -10,20 +10,37 @@ import SkeletonView
 
 class CarListView: UIView {
     
+    lazy var categoryView: UIView = {
+        let view = UIView()
+        view.isSkeletonable = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var categoryLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Avenir", size: 25)
-        label.textColor = .darkGray
+        label.font = UIFont(name: "Avenir-Heavy", size: 18)
+        label.textColor = .black
         label.text = "Explore"
+        label.isSkeletonable = true
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    lazy var titleView: UIView = {
+        let view = UIView()
+        view.isSkeletonable = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Avenir", size: 25)
-        label.textColor = .darkGray
+        label.font = UIFont(name: "Avenir-Heavy", size: 18)
+        label.textColor = .black
+        label.text = "Lorem ipsum"
+        label.isSkeletonable = true
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -56,6 +73,7 @@ class CarListView: UIView {
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
+        isSkeletonable = true
         setupUI()
     }
     
@@ -71,35 +89,50 @@ extension CarListView {
             overrideUserInterfaceStyle = .light
         }
         self.backgroundColor =  UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
-        self.addSubview(categoryLabel)
+        self.addSubview(categoryView)
+        self.categoryView.addSubview(categoryLabel)
         self.addSubview(categoryCollectionView)
-        self.addSubview(titleLabel)
+        self.addSubview(titleView)
+        self.titleView.addSubview(titleLabel)
         self.addSubview(carCollectionView)
         
+        
         NSLayoutConstraint.activate([
-            categoryLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
-            categoryLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
-            categoryLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            categoryView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+            categoryView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            categoryView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            categoryView.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         NSLayoutConstraint.activate([
-            categoryCollectionView.topAnchor.constraint(equalTo: self.categoryLabel.bottomAnchor, constant: 10),
+            categoryLabel.centerYAnchor.constraint(equalTo: self.categoryView.centerYAnchor),
+            categoryLabel.leadingAnchor.constraint(equalTo: self.categoryView.leadingAnchor, constant: 24)
+        ])
+        
+        NSLayoutConstraint.activate([
+            categoryCollectionView.topAnchor.constraint(equalTo: self.categoryView.bottomAnchor, constant: 10),
             categoryCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            categoryCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            categoryCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             categoryCollectionView.heightAnchor.constraint(equalToConstant: 100)
         ])
-          
+        
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.categoryCollectionView.bottomAnchor, constant: 24),
-            titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
-            titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            titleView.topAnchor.constraint(equalTo: self.categoryCollectionView.bottomAnchor, constant: 10),
+            titleView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            titleView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 0),
+            titleView.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         NSLayoutConstraint.activate([
-            carCollectionView.topAnchor.constraint(equalTo:  self.titleLabel.bottomAnchor, constant: 10),
+            titleLabel.centerYAnchor.constraint(equalTo: self.titleView.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: self.titleView.leadingAnchor, constant: 24),
+        ])
+        
+        NSLayoutConstraint.activate([
+            carCollectionView.topAnchor.constraint(equalTo:  self.titleView.bottomAnchor, constant: 10),
             carCollectionView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: 10),
             carCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            carCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+            carCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)
         ])
     }
 }

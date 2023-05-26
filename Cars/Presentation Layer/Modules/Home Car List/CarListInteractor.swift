@@ -9,6 +9,8 @@ import Foundation
 
 
 protocol CarListInteractor: AnyObject {
+    var carsRetrieved: Bool  {get set}
+    var shouldReloadData: Bool {get set}
     func initializeData()
     func reloadData()
     func didSelectRow(at index: Int)
@@ -22,16 +24,23 @@ class CarListInteractorImplementation: CarListInteractor {
     private let carsService = CarsServiceImplementation()
     private var cars: [Car] = []
     private var selectedCategory: Category = Category.newCars
+    var carsRetrieved = false
+    var shouldReloadData: Bool = false
     
     func initializeData()  {
-        self.selectedCategory = Category.newCars
+        self.selectDefaultCategory()
         self.getSelectedCategoryName()
         self.getCars(with: selectedCategory)
         self.getCategories()
     }
     
     func reloadData() {
+        self.selectDefaultCategory()
         self.initializeData()
+    }
+    
+    func selectDefaultCategory() {
+        self.selectedCategory = Category.newCars
     }
     
     func getSelectedCategoryName() {
@@ -80,7 +89,7 @@ class CarListInteractorImplementation: CarListInteractor {
     }
     
     func didSelectCategory(at category: Int) {
-        self.selectedCategory = Category(rawValue: category)!
-        self.presenter?.interactor(didSelectCategory: self.selectedCategory)
+        let selectedCategory: Category = Category(rawValue: category)!
+        self.presenter?.interactor(didSelectCategory: selectedCategory)
     }
 }

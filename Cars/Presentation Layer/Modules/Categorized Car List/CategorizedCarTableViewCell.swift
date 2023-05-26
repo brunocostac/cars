@@ -24,6 +24,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
         carPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         carPriceLabel.font = UIFont(name: "Avenir", size: 14)
         carPriceLabel.textColor = .darkGray
+        carPriceLabel.text = "$ 1000"
         carPriceLabel.isSkeletonable = true
         return carPriceLabel
     }()
@@ -56,7 +57,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
         self.layer.masksToBounds = false
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
-        
+        self.selectionStyle = .none
         self.setupUI()
     }
     

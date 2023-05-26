@@ -13,6 +13,10 @@ protocol CategorizedCarListPresenterOutput: AnyObject {
     func presenter(didObtainCarId id: Int, category: Category)
 }
 
+protocol CategorizedCarListViewControllerDelegate: AnyObject {
+    func didNavigateToDetailsScreen()
+}
+
 class CategorizedCarListViewController: UIViewController {
     var selectedCategory: Category?
     var categorizedCarsView: CategorizedCarListView?
@@ -20,26 +24,32 @@ class CategorizedCarListViewController: UIViewController {
     var router: CategorizedCarListRouter?
     private var cars: [Car] = []
     
+    weak var delegate: CategorizedCarListViewControllerDelegate?
+    
     override func loadView() {
         view = categorizedCarsView
-        title = "Categories"
+        title = self.selectedCategory?.name
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.categorizedCarsView?.tableView.delegate = self
-        self.categorizedCarsView?.tableView.dataSource = self
-        self.categorizedCarsView?.tableView.register(CategorizedCarTableViewCell.self, forCellReuseIdentifier: "CategorizedCarTableViewCell")
+        self.initializeTableView()
+        self.showAnimatedGradientInView()
         self.interactor?.selectedCategory = self.selectedCategory
         self.interactor?.viewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.categorizedCarsView?.tableView.stopSkeletonAnimation()
-            self.categorizedCarsView?.tableView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-            self.categorizedCarsView?.tableView.reloadData()
+    func showAnimatedGradientInView() {
+        view.isSkeletonable = true
+        DispatchQueue.main.async {
+            self.view.showAnimatedGradientSkeleton()
         }
+    }
+    
+    func initializeTableView() {
+        self.categorizedCarsView?.tableView.delegate = self
+        self.categorizedCarsView?.tableView.dataSource = self
+        self.categorizedCarsView?.tableView.register(CategorizedCarTableViewCell.self, forCellReuseIdentifier: "CategorizedCarTableViewCell")
     }
 }
 
@@ -47,12 +57,14 @@ extension CategorizedCarListViewController: CategorizedCarListPresenterOutput {
     func presenter(didObtainCarId id: Int, category: Category) {
         self.router?.navigationController = self.navigationController
         self.router?.routeToDetail(with: id, category: category)
+        self.delegate?.didNavigateToDetailsScreen()
     }
     
     func presenter(didRetrieveCars cars: [Car]) {
-        self.cars = cars
-        DispatchQueue.main.async {
-            self.view.showAnimatedGradientSkeleton()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.view.hideSkeleton()
+            self.cars = cars
+            self.categorizedCarsView?.tableView.reloadData()
         }
     }
 }
@@ -70,7 +82,6 @@ extension CategorizedCarListViewController: SkeletonTableViewDataSource, Skeleto
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategorizedCarTableViewCell", for: indexPath) as? CategorizedCarTableViewCell else {
             return UITableViewCell()
         }
-        
         cell.configure(title: self.cars[indexPath.row].name, imageURL: self.cars[indexPath.row].url_image, price: self.cars[indexPath.row].price)
         return cell
     }

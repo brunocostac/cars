@@ -96,11 +96,25 @@ extension UICollectionView {
 extension UINavigationBar {
     
     static func setGlobalAppearance() {
-        UINavigationBar.appearance().tintColor = UIColor.red
-        UINavigationBar.appearance().barTintColor = .white
-        UINavigationBar.appearance().isTranslucent = true
+        
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundColor = .white
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.purple]
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+            UINavigationBar.appearance().tintColor = .purple
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().compactAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        } else {
+            UINavigationBar.appearance().tintColor = UIColor.purple
+            UINavigationBar.appearance().barTintColor = .purple
+            UINavigationBar.appearance().isTranslucent = true
+        }
+        
         UINavigationBar.appearance().backIndicatorImage = UIImage(named: "back_arrow")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "back_arrow")
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
+        
     }
 }

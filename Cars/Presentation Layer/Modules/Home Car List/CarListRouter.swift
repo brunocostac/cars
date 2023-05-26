@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Foundation
 
 protocol CarListRouter: AnyObject {
     var navigationController: UINavigationController? { get }
     
     func routeToDetail(with id: Int, category: Category)
-    func routeToCategorizedCarList(category: Category) 
+    func routeToCategorizedCarList(category: Category, instance: CarListViewController)
 }
 
 class CarListRouterImplementation: CarListRouter {
@@ -23,8 +24,9 @@ class CarListRouterImplementation: CarListRouter {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func routeToCategorizedCarList(category: Category) {
+    func routeToCategorizedCarList(category: Category, instance: CarListViewController) {
         let viewController = CategorizedCarListViewController()
+        viewController.delegate = instance
         CategorizedCarListConfigurator.configureModule(category: category,
                                                 viewController: viewController)
         

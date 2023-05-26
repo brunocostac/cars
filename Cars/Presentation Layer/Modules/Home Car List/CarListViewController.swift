@@ -24,14 +24,8 @@ class CarListViewController: UIViewController {
     var carsView: CarListView?
     var interactor: CarListInteractor?
     var router: CarListRouter?
-    var carsRetrieved = false
-    private var cars: [Car] = []  {
-        didSet {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.view.hideSkeleton()
-            }
-        }
-    }
+  
+    private var cars: [Car] = []
     private var categories: [[String : Any]] = []
     
     // MARK: - Lifecycle Methods
@@ -46,6 +40,14 @@ class CarListViewController: UIViewController {
         self.initializeCollectionViews()
         self.interactor?.initializeData()
         self.showAnimatedGradientInView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.interactor?.shouldReloadData == true {
+            self.interactor?.reloadData()
+            self.interactor?.shouldReloadData = false
+        }
     }
     
     func showAnimatedGradientInView() {
@@ -71,7 +73,7 @@ class CarListViewController: UIViewController {
 // MARK: - Presenter Output
 extension CarListViewController: CarListPresenterOutput {
     func presenter(didSelectCategory category: Category) {
-        self.router?.routeToCategorizedCarList(category: category)
+        self.router?.routeToCategorizedCarList(category: category, instance: self)
     }
 
     func presenter(didRetrieveCategories categories: [[String : Any]]) {
@@ -82,16 +84,19 @@ extension CarListViewController: CarListPresenterOutput {
     }
 
     func presenter(didRetrieveCars cars: [Car]) {
-        self.carsRetrieved = true
+        self.interactor?.carsRetrieved = true
         self.cars = cars
         DispatchQueue.main.async {
             self.carsView?.carCollectionView.reloadData()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.view.hideSkeleton()
         }
     }
     
     func presenter(didRetrieveCategoryName name: String) {
         DispatchQueue.main.async {
-          self.carsView?.titleLabel.text = name
+            self.carsView?.titleLabel.text = name
         }
     }
     
@@ -109,6 +114,12 @@ extension CarListViewController: CarListPresenterOutput {
     }
 }
 
+extension CarListViewController: CategorizedCarListViewControllerDelegate {
+    func didNavigateToDetailsScreen() {
+        self.interactor?.shouldReloadData = true
+    }
+}
+
 // MARK: - UITableView DataSource & Delegate
 
 extension CarListViewController: SkeletonCollectionViewDelegate, SkeletonCollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -116,7 +127,7 @@ extension CarListViewController: SkeletonCollectionViewDelegate, SkeletonCollect
         if collectionView.tag == 1 {
             return categories.count
         } else {
-            if self.cars.count == 0 && carsRetrieved {
+            if self.cars.count == 0 && self.interactor?.carsRetrieved == true {
                 self.carsView?.carCollectionView.setEmptyView(title: "No cars were found.", message: "", messageImage: UIImage(systemName: "magnifyingglass.circle")!)
             } else {
                 self.carsView?.carCollectionView.backgroundView = nil
