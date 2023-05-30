@@ -9,14 +9,23 @@ import UIKit
 import SDWebImage
 
 class CategorizedCarTableViewCell: UITableViewCell {
-
+    
     let carNameLabel: UILabel = {
         let carNameLabel = UILabel()
         carNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        carNameLabel.font = UIFont(name: "Avenir", size: 20)
+        carNameLabel.font = UIFont(name: "Avenir-Black", size: 14)
         carNameLabel.textColor = .black
         carNameLabel.isSkeletonable = true
         return carNameLabel
+    }()
+    
+    let costIcon: UIImageView = {
+        let costIcon = UIImageView()
+        costIcon.translatesAutoresizingMaskIntoConstraints = false
+        costIcon.image = UIImage(systemName: "banknote")
+        costIcon.tintColor = .darkGray
+        costIcon.isSkeletonable = true
+        return costIcon
     }()
     
     let carPriceLabel: UILabel = {
@@ -30,20 +39,30 @@ class CategorizedCarTableViewCell: UITableViewCell {
     }()
     
     let carImageView: UIImageView = {
-       let carImageView = UIImageView()
-       carImageView.translatesAutoresizingMaskIntoConstraints = false
-       carImageView.contentMode = .scaleAspectFit
-       carImageView.isSkeletonable = true
-       return carImageView
+        let carImageView = UIImageView()
+        carImageView.translatesAutoresizingMaskIntoConstraints = false
+        carImageView.contentMode = .scaleAspectFit
+        carImageView.isSkeletonable = true
+        return carImageView
     }()
     
-    let stackView: UIStackView = {
-       let stackView = UIStackView()
-       stackView.translatesAutoresizingMaskIntoConstraints = false
-       stackView.axis = .horizontal
-       stackView.spacing = 10 // Set spacing between labels
-       stackView.isSkeletonable = true
-       return stackView
+    let horizontalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 10 // Set spacing between labels
+        stackView.isSkeletonable = true
+        return stackView
+    }()
+    
+    let verticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 10 // Set spacing between labels
+        stackView.isSkeletonable = true
+        return stackView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -67,26 +86,60 @@ class CategorizedCarTableViewCell: UITableViewCell {
     
     func setupUI() {
         contentView.addSubview(carImageView)
-        contentView.addSubview(stackView)
-        stackView.addArrangedSubview(carNameLabel)
-        stackView.addArrangedSubview(carPriceLabel)
+        contentView.addSubview(verticalStackView)
+        
+        horizontalStackView.addArrangedSubview(costIcon)
+        horizontalStackView.addArrangedSubview(carPriceLabel)
+        verticalStackView.addArrangedSubview(carNameLabel)
+        verticalStackView.addArrangedSubview(horizontalStackView)
         
         NSLayoutConstraint.activate([
             carImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            carImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             carImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            carImageView.heightAnchor.constraint(equalToConstant: 140),
+            carImageView.widthAnchor.constraint(equalToConstant: self.frame.size.width/2),
+            carImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            stackView.topAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8)
+            horizontalStackView.leadingAnchor.constraint(equalTo: verticalStackView.leadingAnchor, constant: 0),
+            horizontalStackView.trailingAnchor.constraint(equalTo: verticalStackView.trailingAnchor, constant: 0),
+            
+            costIcon.widthAnchor.constraint(equalToConstant: 18),
+            costIcon.heightAnchor.constraint(equalToConstant: 18),
+            
+            
+            verticalStackView.centerYAnchor.constraint(equalTo: carImageView.centerYAnchor),
+            verticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            verticalStackView.trailingAnchor.constraint(equalTo: carImageView.leadingAnchor, constant: -10)
         ])
     }
-   
+    
     func configure(title: String, imageURL: URL, price: String) {
         self.carNameLabel.text = title
-        self.carPriceLabel.text = "$ \(price)"
+        
+        if let formattedDollarValue = formatToDollar(price) {
+            self.carPriceLabel.text = "$ \(String(describing: formatToDollar(formattedDollarValue)))"
+        }
+        
         self.carImageView.sd_setImage(with: imageURL)
+    }
+    
+    func formatToDollar(_ numberString: String) -> String? {
+        // Remove any existing punctuation from the number string
+        let cleanedNumberString = numberString.replacingOccurrences(of: ".", with: "")
+        
+        // Convert the cleaned string to a number
+        guard let number = Double(cleanedNumberString) else {
+            return nil
+        }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = "USD"  // Set the currency code if needed
+        formatter.locale = Locale.current  // Use the current locale
+        
+        if let formattedString = formatter.string(from: NSNumber(value: number)) {
+            return formattedString
+        }
+        
+        return nil
     }
 }

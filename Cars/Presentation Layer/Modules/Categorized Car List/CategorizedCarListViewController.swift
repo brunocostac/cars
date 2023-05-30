@@ -82,7 +82,7 @@ extension CategorizedCarListViewController: SkeletonTableViewDataSource, Skeleto
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CategorizedCarTableViewCell", for: indexPath) as? CategorizedCarTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(title: self.cars[indexPath.row].name, imageURL: self.cars[indexPath.row].url_image, price: self.cars[indexPath.row].price)
+        cell.configure(title: self.cars[indexPath.row].name.uppercased(), imageURL: self.cars[indexPath.row].url_image, price: self.cars[indexPath.row].price)
         return cell
     }
     

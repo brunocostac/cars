@@ -14,7 +14,7 @@ class CategorizedCarListView: UIView {
     let tableView: UITableView = {
        let tableView = UITableView()
        tableView.translatesAutoresizingMaskIntoConstraints = false
-       tableView.rowHeight = 180
+       tableView.rowHeight = 100
        tableView.isSkeletonable = true
        return tableView
     }()
