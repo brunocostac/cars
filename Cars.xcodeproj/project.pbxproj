@@ -29,6 +29,12 @@
 		114D7C3029EDDF2B00BC1888 /* CarListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7C2A29EDDF2B00BC1888 /* CarListConfigurator.swift */; };
 		114D7C3129EDDF2B00BC1888 /* CarListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7C2B29EDDF2B00BC1888 /* CarListPresenter.swift */; };
 		114D7C3329EDDF9A00BC1888 /* CarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7C3229EDDF9A00BC1888 /* CarListViewController.swift */; };
+		116174DD2A2F823A005BDCD4 /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116174DC2A2F823A005BDCD4 /* FavoritesListViewController.swift */; };
+		116174DF2A2F8264005BDCD4 /* FavoritesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116174DE2A2F8264005BDCD4 /* FavoritesListConfigurator.swift */; };
+		116174E12A2F828E005BDCD4 /* FavoritesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116174E02A2F828E005BDCD4 /* FavoritesListView.swift */; };
+		116174E32A2F82CF005BDCD4 /* FavoritesListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116174E22A2F82CF005BDCD4 /* FavoritesListRouter.swift */; };
+		116174E52A2F8310005BDCD4 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116174E42A2F8310005BDCD4 /* FavoritesTableViewCell.swift */; };
+		116174E72A2F833E005BDCD4 /* FavoritesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116174E62A2F833E005BDCD4 /* FavoritesListPresenter.swift */; };
 		11923F5B2A02D9E4002D2223 /* CategorizedCarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11923F5A2A02D9E4002D2223 /* CategorizedCarListViewController.swift */; };
 		11923F5D2A02DADF002D2223 /* CategorizedCarListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11923F5C2A02DADF002D2223 /* CategorizedCarListConfigurator.swift */; };
 		11923F5F2A02DD3C002D2223 /* CategorizedCarListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11923F5E2A02DD3C002D2223 /* CategorizedCarListView.swift */; };
@@ -38,7 +44,17 @@
 		11923F6D2A02FAA9002D2223 /* CategorizedCarListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11923F6C2A02FAA9002D2223 /* CategorizedCarListRouter.swift */; };
 		11AE0E7F29FB271100B21C1A /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AE0E7D29FB271100B21C1A /* CategoryCollectionViewCell.swift */; };
 		11AE0E8029FB271100B21C1A /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11AE0E7E29FB271100B21C1A /* CategoryCollectionViewCell.xib */; };
+		11D7E54F2A2802FD00257BB2 /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D7E54E2A2802FD00257BB2 /* CategoriesTableViewCell.swift */; };
 		11F1B3A429F94EB200628023 /* HomeCarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11F1B3A329F94EB100628023 /* HomeCarCollectionViewCell.xib */; };
+		11F812622A2FE15800AAACF0 /* FavoritesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F812612A2FE15800AAACF0 /* FavoritesListInteractor.swift */; };
+		11F812652A2FEE1100AAACF0 /* FavoritesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11F812632A2FEE1000AAACF0 /* FavoritesDataModel.xcdatamodeld */; };
+		11F95EA82A26A65B0067B240 /* CategoriesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F95EA72A26A65B0067B240 /* CategoriesListViewController.swift */; };
+		11F95EAA2A26A67E0067B240 /* CategoriesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F95EA92A26A67E0067B240 /* CategoriesListConfigurator.swift */; };
+		11F95EAC2A26AC560067B240 /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F95EAB2A26AC560067B240 /* CategoriesListView.swift */; };
+		11F95EAE2A26ACAF0067B240 /* CategoriesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F95EAD2A26ACAF0067B240 /* CategoriesListInteractor.swift */; };
+		11F95EB02A26AD420067B240 /* CategoriesListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F95EAF2A26AD420067B240 /* CategoriesListRouter.swift */; };
+		11F95EB22A26AD740067B240 /* CategoriesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F95EB12A26AD740067B240 /* CategoriesListPresenter.swift */; };
+		11F9FB8D2A30B27900BAC66A /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F9FB8C2A30B27900BAC66A /* FavoritesManager.swift */; };
 		6FC72FDE92712CCA36EC1900 /* Pods_Cars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052C3DCB08F581B323734AF4 /* Pods_Cars.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +84,13 @@
 		114D7C2A29EDDF2B00BC1888 /* CarListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListConfigurator.swift; sourceTree = "<group>"; };
 		114D7C2B29EDDF2B00BC1888 /* CarListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListPresenter.swift; sourceTree = "<group>"; };
 		114D7C3229EDDF9A00BC1888 /* CarListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListViewController.swift; sourceTree = "<group>"; };
+		116174DC2A2F823A005BDCD4 /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
+		116174DE2A2F8264005BDCD4 /* FavoritesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListConfigurator.swift; sourceTree = "<group>"; };
+		116174E02A2F828E005BDCD4 /* FavoritesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListView.swift; sourceTree = "<group>"; };
+		116174E22A2F82CF005BDCD4 /* FavoritesListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListRouter.swift; sourceTree = "<group>"; };
+		116174E42A2F8310005BDCD4 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		116174E62A2F833E005BDCD4 /* FavoritesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListPresenter.swift; sourceTree = "<group>"; };
+		1167B2592A37627500BD159F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		11923F5A2A02D9E4002D2223 /* CategorizedCarListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizedCarListViewController.swift; sourceTree = "<group>"; };
 		11923F5C2A02DADF002D2223 /* CategorizedCarListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizedCarListConfigurator.swift; sourceTree = "<group>"; };
 		11923F5E2A02DD3C002D2223 /* CategorizedCarListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizedCarListView.swift; sourceTree = "<group>"; };
@@ -77,7 +100,17 @@
 		11923F6C2A02FAA9002D2223 /* CategorizedCarListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizedCarListRouter.swift; sourceTree = "<group>"; };
 		11AE0E7D29FB271100B21C1A /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		11AE0E7E29FB271100B21C1A /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		11D7E54E2A2802FD00257BB2 /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		11F1B3A329F94EB100628023 /* HomeCarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCarCollectionViewCell.xib; sourceTree = "<group>"; };
+		11F812612A2FE15800AAACF0 /* FavoritesListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListInteractor.swift; sourceTree = "<group>"; };
+		11F812642A2FEE1100AAACF0 /* FavoritesDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoritesDataModel.xcdatamodel; sourceTree = "<group>"; };
+		11F95EA72A26A65B0067B240 /* CategoriesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListViewController.swift; sourceTree = "<group>"; };
+		11F95EA92A26A67E0067B240 /* CategoriesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListConfigurator.swift; sourceTree = "<group>"; };
+		11F95EAB2A26AC560067B240 /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
+		11F95EAD2A26ACAF0067B240 /* CategoriesListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListInteractor.swift; sourceTree = "<group>"; };
+		11F95EAF2A26AD420067B240 /* CategoriesListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListRouter.swift; sourceTree = "<group>"; };
+		11F95EB12A26AD740067B240 /* CategoriesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListPresenter.swift; sourceTree = "<group>"; };
+		11F9FB8C2A30B27900BAC66A /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		8D1051F53680DC8E24F2C3F4 /* Pods-Cars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cars.release.xcconfig"; path = "Target Support Files/Pods-Cars/Pods-Cars.release.xcconfig"; sourceTree = "<group>"; };
 		D7DC894D271936B99CC3925E /* Pods-Cars.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cars.debug.xcconfig"; path = "Target Support Files/Pods-Cars/Pods-Cars.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +162,9 @@
 			children = (
 				114D7C0F29EDDDD500BC1888 /* Services */,
 				114BC67829F08904001A401F /* Category.swift */,
+				114D7C1229EDDDFA00BC1888 /* Car.swift */,
+				11F812632A2FEE1000AAACF0 /* FavoritesDataModel.xcdatamodeld */,
+				11F9FB8C2A30B27900BAC66A /* FavoritesManager.swift */,
 			);
 			path = "Business Logic Layer";
 			sourceTree = "<group>";
@@ -137,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				114D7C1029EDDDEA00BC1888 /* CarsService.swift */,
-				114D7C1229EDDDFA00BC1888 /* Car.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -162,6 +197,8 @@
 		114D7C1629EDDE5E00BC1888 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				116174DB2A2F8215005BDCD4 /* Favorites List */,
+				11F95EA62A26A6310067B240 /* Categories List */,
 				11923F592A02D82E002D2223 /* Categorized Car List */,
 				114D7C1829EDDE6D00BC1888 /* Home Car List */,
 				114D7C1729EDDE6500BC1888 /* Car Detail */,
@@ -210,6 +247,20 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		116174DB2A2F8215005BDCD4 /* Favorites List */ = {
+			isa = PBXGroup;
+			children = (
+				116174DC2A2F823A005BDCD4 /* FavoritesListViewController.swift */,
+				116174DE2A2F8264005BDCD4 /* FavoritesListConfigurator.swift */,
+				11F812612A2FE15800AAACF0 /* FavoritesListInteractor.swift */,
+				116174E62A2F833E005BDCD4 /* FavoritesListPresenter.swift */,
+				116174E02A2F828E005BDCD4 /* FavoritesListView.swift */,
+				116174E22A2F82CF005BDCD4 /* FavoritesListRouter.swift */,
+				116174E42A2F8310005BDCD4 /* FavoritesTableViewCell.swift */,
+			);
+			path = "Favorites List";
+			sourceTree = "<group>";
+		};
 		11923F592A02D82E002D2223 /* Categorized Car List */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,9 +275,24 @@
 			path = "Categorized Car List";
 			sourceTree = "<group>";
 		};
+		11F95EA62A26A6310067B240 /* Categories List */ = {
+			isa = PBXGroup;
+			children = (
+				11F95EA72A26A65B0067B240 /* CategoriesListViewController.swift */,
+				11F95EA92A26A67E0067B240 /* CategoriesListConfigurator.swift */,
+				11F95EAD2A26ACAF0067B240 /* CategoriesListInteractor.swift */,
+				11F95EB12A26AD740067B240 /* CategoriesListPresenter.swift */,
+				11F95EAF2A26AD420067B240 /* CategoriesListRouter.swift */,
+				11F95EAB2A26AC560067B240 /* CategoriesListView.swift */,
+				11D7E54E2A2802FD00257BB2 /* CategoriesTableViewCell.swift */,
+			);
+			path = "Categories List";
+			sourceTree = "<group>";
+		};
 		92D1A91EAA0915ADEB850DF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1167B2592A37627500BD159F /* CoreData.framework */,
 				052C3DCB08F581B323734AF4 /* Pods_Cars.framework */,
 			);
 			name = Frameworks;
@@ -358,28 +424,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				114D7C2329EDDF0E00BC1888 /* CarDetailPresenter.swift in Sources */,
+				11F95EB02A26AD420067B240 /* CategoriesListRouter.swift in Sources */,
 				114D7C1B29EDDE9C00BC1888 /* Extensions.swift in Sources */,
 				114D7C2D29EDDF2B00BC1888 /* CarListRouter.swift in Sources */,
+				11F95EB22A26AD740067B240 /* CategoriesListPresenter.swift in Sources */,
+				116174E52A2F8310005BDCD4 /* FavoritesTableViewCell.swift in Sources */,
 				114D7C2229EDDF0E00BC1888 /* CarDetailRouter.swift in Sources */,
 				114D7BF929EDC2CA00BC1888 /* AppDelegate.swift in Sources */,
 				114D7C3129EDDF2B00BC1888 /* CarListPresenter.swift in Sources */,
 				114D7C2529EDDF0E00BC1888 /* CarDetailConfigurator.swift in Sources */,
 				114D7C1329EDDDFA00BC1888 /* Car.swift in Sources */,
 				114D7C2C29EDDF2B00BC1888 /* CarListInteractor.swift in Sources */,
+				116174E72A2F833E005BDCD4 /* FavoritesListPresenter.swift in Sources */,
 				114D7C3029EDDF2B00BC1888 /* CarListConfigurator.swift in Sources */,
+				116174DF2A2F8264005BDCD4 /* FavoritesListConfigurator.swift in Sources */,
+				11F95EAA2A26A67E0067B240 /* CategoriesListConfigurator.swift in Sources */,
 				114D7C1129EDDDEA00BC1888 /* CarsService.swift in Sources */,
+				11F812652A2FEE1100AAACF0 /* FavoritesDataModel.xcdatamodeld in Sources */,
+				11F95EAE2A26ACAF0067B240 /* CategoriesListInteractor.swift in Sources */,
 				11923F632A02DDD7002D2223 /* CategorizedCarListPresenter.swift in Sources */,
 				114D7BFB29EDC2CA00BC1888 /* SceneDelegate.swift in Sources */,
+				11F812622A2FE15800AAACF0 /* FavoritesListInteractor.swift in Sources */,
+				116174E12A2F828E005BDCD4 /* FavoritesListView.swift in Sources */,
+				11F95EA82A26A65B0067B240 /* CategoriesListViewController.swift in Sources */,
 				114D7C3329EDDF9A00BC1888 /* CarListViewController.swift in Sources */,
+				11D7E54F2A2802FD00257BB2 /* CategoriesTableViewCell.swift in Sources */,
 				110A08932A20E1B6001A18E3 /* CustomUITabBarController.swift in Sources */,
+				11F9FB8D2A30B27900BAC66A /* FavoritesManager.swift in Sources */,
+				11F95EAC2A26AC560067B240 /* CategoriesListView.swift in Sources */,
 				11AE0E7F29FB271100B21C1A /* CategoryCollectionViewCell.swift in Sources */,
 				114BC67929F08905001A401F /* Category.swift in Sources */,
+				116174E32A2F82CF005BDCD4 /* FavoritesListRouter.swift in Sources */,
 				11923F612A02DD6E002D2223 /* CategorizedCarListInteractor.swift in Sources */,
 				114D7C2429EDDF0E00BC1888 /* CarDetailView.swift in Sources */,
 				11923F6A2A02F0AC002D2223 /* CategorizedCarTableViewCell.swift in Sources */,
 				114BC67629F0291C001A401F /* HomeCarCollectionViewCell.swift in Sources */,
 				114D7C2129EDDF0E00BC1888 /* CarDetailInteractor.swift in Sources */,
 				11923F5D2A02DADF002D2223 /* CategorizedCarListConfigurator.swift in Sources */,
+				116174DD2A2F823A005BDCD4 /* FavoritesListViewController.swift in Sources */,
 				114D7C2E29EDDF2B00BC1888 /* CarListView.swift in Sources */,
 				11923F5F2A02DD3C002D2223 /* CategorizedCarListView.swift in Sources */,
 				114D7C2F29EDDF2B00BC1888 /* CarDetailViewController.swift in Sources */,
@@ -592,6 +674,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		11F812632A2FEE1000AAACF0 /* FavoritesDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				11F812642A2FEE1100AAACF0 /* FavoritesDataModel.xcdatamodel */,
+			);
+			currentVersion = 11F812642A2FEE1100AAACF0 /* FavoritesDataModel.xcdatamodel */;
+			path = FavoritesDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 114D7BED29EDC2CA00BC1888 /* Project object */;
 }

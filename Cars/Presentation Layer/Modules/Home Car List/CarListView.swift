@@ -17,6 +17,13 @@ class CarListView: UIView {
         return view
     }()
     
+    lazy var lineView: UIView = {
+       let view = UIView()
+       view.backgroundColor = .opaqueSeparator
+       view.translatesAutoresizingMaskIntoConstraints = false
+       return view
+    }()
+    
     lazy var categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Avenir-Heavy", size: 18)
@@ -35,11 +42,18 @@ class CarListView: UIView {
         return view
     }()
 
+    lazy var lineViewTwo: UIView = {
+        let view = UIView()
+        view.backgroundColor = .opaqueSeparator
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Avenir-Heavy", size: 18)
         label.textColor = .black
-        label.text = "Lorem ipsum"
+        label.text = "New Cars"
         label.isSkeletonable = true
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -69,6 +83,25 @@ class CarListView: UIView {
         return cv
     }()
     
+    let exploreButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.text = "See all >"
+        button.titleLabel?.font = UIFont(name: "Avenir", size: 14)
+        button.setTitleColor(.purple, for: .normal)
+        button.isSkeletonable = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let categoryButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.text = "See all >"
+        button.titleLabel?.font = UIFont(name: "Avenir", size: 14)
+        button.setTitleColor(.purple, for: .normal)
+        button.isSkeletonable = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     // MARK: - Initialization
     override init(frame: CGRect) {
@@ -88,14 +121,18 @@ extension CarListView {
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
+        
         self.backgroundColor =  UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
         self.addSubview(categoryView)
+        self.addSubview(lineView)
         self.categoryView.addSubview(categoryLabel)
+        self.categoryView.addSubview(exploreButton)
         self.addSubview(categoryCollectionView)
         self.addSubview(titleView)
+        self.addSubview(lineViewTwo)
         self.titleView.addSubview(titleLabel)
+        self.titleView.addSubview(categoryButton)
         self.addSubview(carCollectionView)
-        
         
         NSLayoutConstraint.activate([
             categoryView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -105,8 +142,20 @@ extension CarListView {
         ])
         
         NSLayoutConstraint.activate([
+            lineView.topAnchor.constraint(equalTo: categoryView.bottomAnchor, constant: 2),
+            lineView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            lineView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -12),
+            lineView.heightAnchor.constraint(equalToConstant: 1.0)
+        ])
+        
+        NSLayoutConstraint.activate([
             categoryLabel.centerYAnchor.constraint(equalTo: self.categoryView.centerYAnchor),
             categoryLabel.leadingAnchor.constraint(equalTo: self.categoryView.leadingAnchor, constant: 24)
+        ])
+        
+        NSLayoutConstraint.activate([
+            exploreButton.centerYAnchor.constraint(equalTo: self.categoryLabel.centerYAnchor),
+            exploreButton.trailingAnchor.constraint(equalTo: self.categoryView.trailingAnchor, constant: -12)
         ])
         
         NSLayoutConstraint.activate([
@@ -123,9 +172,22 @@ extension CarListView {
             titleView.heightAnchor.constraint(equalToConstant: 40)
         ])
         
+        
         NSLayoutConstraint.activate([
             titleLabel.centerYAnchor.constraint(equalTo: self.titleView.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: self.titleView.leadingAnchor, constant: 24),
+        ])
+        
+        NSLayoutConstraint.activate([
+            lineViewTwo.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 2),
+            lineViewTwo.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            lineViewTwo.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -12),
+            lineViewTwo.heightAnchor.constraint(equalToConstant: 1.0)
+        ])
+        
+        NSLayoutConstraint.activate([
+           categoryButton.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor),
+           categoryButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12)
         ])
         
         NSLayoutConstraint.activate([

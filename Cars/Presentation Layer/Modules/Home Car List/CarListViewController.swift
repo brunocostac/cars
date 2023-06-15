@@ -16,6 +16,7 @@ protocol CarListPresenterOutput: AnyObject {
     func presenter(didObtainCarId id: Int, category: Category)
     func presenter(didFailObtainCarId message: String)
     func presenter(didSelectCategory category: Category)
+    func presenter(didSelectAllCategories categories: [[String: Any]])
 }
 
 class CarListViewController: UIViewController {
@@ -32,18 +33,21 @@ class CarListViewController: UIViewController {
     
     override func loadView() {
         self.view = carsView
-        title = "Cars"
+        title = "Home"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initializeCollectionViews()
-        self.interactor?.initializeData()
+        self.setupCollectionViews()
         self.showAnimatedGradientInView()
+        self.interactor?.viewDidLoad()
+        self.interactor?.getSelectedCategoryName()
+        self.setupButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.interactor?.getSelectedCategoryName()
         if self.interactor?.shouldReloadData == true {
             self.interactor?.reloadData()
             self.interactor?.shouldReloadData = false
@@ -52,14 +56,12 @@ class CarListViewController: UIViewController {
     
     func showAnimatedGradientInView() {
         view.isSkeletonable = true
-        [self.carsView?.categoryCollectionView, self.carsView?.carCollectionView].forEach {
-            $0?.prepareSkeleton(completion: { done in
-                self.view.showAnimatedSkeleton()
-            })
+        DispatchQueue.main.async {
+            self.view.showAnimatedSkeleton()
         }
     }
     
-    func initializeCollectionViews() {
+    func setupCollectionViews() {
         self.carsView?.carCollectionView.delegate = self
         self.carsView?.carCollectionView.dataSource = self
         self.carsView?.carCollectionView.register(UINib(nibName: "HomeCarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeCarCollectionViewCell")
@@ -68,6 +70,19 @@ class CarListViewController: UIViewController {
         self.carsView?.categoryCollectionView.dataSource = self
         self.carsView?.categoryCollectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
     }
+    
+    func setupButtons() {
+        self.carsView?.exploreButton.addTarget(self, action: #selector(exploreButtonPressed), for: .touchUpInside)
+        self.carsView?.categoryButton.addTarget(self, action: #selector(categoryButtonPressed), for: .touchUpInside)
+    }
+    
+    @objc func exploreButtonPressed() {
+        self.interactor?.didPressExploreButton()
+    }
+    
+    @objc func categoryButtonPressed() {
+        self.interactor?.didPressCategoryButton()
+    }
 }
 
 // MARK: - Presenter Output
@@ -75,22 +90,24 @@ extension CarListViewController: CarListPresenterOutput {
     func presenter(didSelectCategory category: Category) {
         self.router?.routeToCategorizedCarList(category: category, instance: self)
     }
+    
+    func presenter(didSelectAllCategories categories: [[String : Any]]) {
+        self.router?.routeToCategories()
+    }
 
     func presenter(didRetrieveCategories categories: [[String : Any]]) {
-        self.categories = categories
         DispatchQueue.main.async {
+            self.categories = categories
             self.carsView?.categoryCollectionView.reloadData()
         }
     }
 
     func presenter(didRetrieveCars cars: [Car]) {
         self.interactor?.carsRetrieved = true
-        self.cars = cars
-        DispatchQueue.main.async {
-            self.carsView?.carCollectionView.reloadData()
-        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.view.hideSkeleton()
+            self.cars = cars
+            self.carsView?.carCollectionView.reloadData()
         }
     }
     
@@ -140,7 +157,7 @@ extension CarListViewController: SkeletonCollectionViewDelegate, SkeletonCollect
         if skeletonView.tag == 1 {
             return "CategoryCollectionViewCell"
         } else {
-           return "HomeCarCollectionViewCell"
+            return "HomeCarCollectionViewCell"
         }
     }
     
@@ -151,23 +168,24 @@ extension CarListViewController: SkeletonCollectionViewDelegate, SkeletonCollect
             
             categoryCell.updateImage(imageURL: item["image_url"] as! String)
             categoryCell.titleLabel.text =  item["name"] as? String
-
+            
             return categoryCell
             
         } else {
             let carCell = self.carsView?.carCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeCarCollectionViewCell", for: indexPath) as! HomeCarCollectionViewCell
             let item = self.cars[indexPath.row]
-            
+            let isFavorite = self.interactor?.checkIsFavorite(car: item)
+            carCell.indexPath = indexPath
             carCell.updateImage(imageURL: item.url_image)
-            carCell.nameLabel.text = item.name
-            carCell.descLabel.text = "$ \(item.price)"
-            
+            carCell.configure(name:  item.name, description: item.price.formatToDollar()!, isFavorite: isFavorite!)
+            carCell.delegate = self
             return carCell
         }
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         if collectionView.tag == 1 {
             let itemWidth = collectionView.bounds.width / 3
             let itemHeight = itemWidth * 0.8
@@ -185,5 +203,11 @@ extension CarListViewController: SkeletonCollectionViewDelegate, SkeletonCollect
         } else {
             self.interactor?.didSelectRow(at: indexPath.row)
         }
+    }
+}
+
+extension CarListViewController: HomeCarCollectionViewCellDelegate {
+    func didPressFavoriteButton(indexPath: IndexPath) {
+        self.interactor?.didPressFavoriteButton(at: indexPath.row)
     }
 }

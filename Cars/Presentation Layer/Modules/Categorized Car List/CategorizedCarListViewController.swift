@@ -33,7 +33,7 @@ class CategorizedCarListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initializeTableView()
+        self.setupTableView()
         self.showAnimatedGradientInView()
         self.interactor?.selectedCategory = self.selectedCategory
         self.interactor?.viewDidLoad()
@@ -46,10 +46,11 @@ class CategorizedCarListViewController: UIViewController {
         }
     }
     
-    func initializeTableView() {
+    func setupTableView() {
         self.categorizedCarsView?.tableView.delegate = self
         self.categorizedCarsView?.tableView.dataSource = self
         self.categorizedCarsView?.tableView.register(CategorizedCarTableViewCell.self, forCellReuseIdentifier: "CategorizedCarTableViewCell")
+        self.categorizedCarsView?.tableView.separatorStyle = .none
     }
 }
 

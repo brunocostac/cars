@@ -18,22 +18,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
         let tabBarController = CustomUITabBarController()
         
-        let carListViewController = CarListViewController()
-        carListViewController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 0)
-        
-        let navigationController = UINavigationController(rootViewController: carListViewController)
-        CarListConfigurator.configureModule(viewController: carListViewController)
+        // SCREEN 1
+        let carListVC = CarListViewController()
+        carListVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 0)
+        let navigationController = UINavigationController(rootViewController: carListVC)
+        CarListConfigurator.configureModule(viewController: carListVC)
       
         
-        let secondViewController = UIViewController()
-        secondViewController.view.backgroundColor = .white
-        secondViewController.tabBarItem = UITabBarItem(title: "Categories", image: UIImage(systemName: "list.bullet.indent"), tag: 1)
+        // SCREEN 2
         
-        let thirdViewController = UIViewController()
-        thirdViewController.view.backgroundColor = .white
-        thirdViewController.tabBarItem = UITabBarItem(title: "Garage", image: UIImage(systemName: "heart"), tag: 2)
+        let categoriesListVC = CategoriesListViewController()
+        categoriesListVC.tabBarItem = UITabBarItem(title: "Categories", image: UIImage(systemName: "list.bullet.indent"), tag: 1)
+        let navigationControllerTwo = UINavigationController(rootViewController: categoriesListVC)
+        CategoriesListConfigurator.configureModule(viewController: categoriesListVC)
         
-        tabBarController.viewControllers = [navigationController, secondViewController, thirdViewController]
+        // SCREEN 3
+        let favoritesListVC = FavoritesListViewController()
+        favoritesListVC.tabBarItem = UITabBarItem(title: "Garage", image: UIImage(systemName: "heart"), tag: 2)
+        let navigationControllerThree = UINavigationController(rootViewController: favoritesListVC)
+        FavoritesListConfigurator.configureModule(viewController: favoritesListVC)
+        
+        tabBarController.viewControllers = [navigationController, navigationControllerTwo, navigationControllerThree]
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()

@@ -158,6 +158,7 @@ extension CarDetailView {
             
             titleLabel.topAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             
             descLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 10),
             descLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),

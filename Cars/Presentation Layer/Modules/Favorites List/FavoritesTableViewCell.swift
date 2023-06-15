@@ -1,15 +1,14 @@
 //
-//  CategorizedCarTableViewCell.swift
+//  FavoritesTableViewCell.swift
 //  Cars
 //
-//  Created by Bruno Costa on 03/05/23.
+//  Created by Bruno Costa on 06/06/23.
 //
 
 import UIKit
-import SDWebImage
+import SkeletonView
 
-class CategorizedCarTableViewCell: UITableViewCell {
-    
+class FavoritesTableViewCell: UITableViewCell {
     override var frame: CGRect {
         get {
             return super.frame
@@ -28,6 +27,7 @@ class CategorizedCarTableViewCell: UITableViewCell {
         carNameLabel.font = UIFont(name: "Avenir-Black", size: 14)
         carNameLabel.textColor = .black
         carNameLabel.isSkeletonable = true
+        carNameLabel.text = "Car Y"
         return carNameLabel
     }()
     

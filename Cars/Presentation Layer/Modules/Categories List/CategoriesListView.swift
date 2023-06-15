@@ -1,20 +1,22 @@
 //
-//  CategorizedCarListView.swift
+//  CategoriesListView.swift
 //  Cars
 //
-//  Created by Bruno Costa on 03/05/23.
+//  Created by Bruno Costa on 30/05/23.
 //
 
 import UIKit
 import SkeletonView
 
-class CategorizedCarListView: UIView {
+class CategoriesListView: UIView {
     
     // MARK: - Properties
     let tableView: UITableView = {
        let tableView = UITableView()
        tableView.translatesAutoresizingMaskIntoConstraints = false
-       tableView.rowHeight = 100
+       tableView.rowHeight = 120
+       tableView.separatorStyle = .none
+       tableView.separatorColor = .clear
        tableView.backgroundColor = .systemGray6
        tableView.isSkeletonable = true
        return tableView
@@ -23,7 +25,6 @@ class CategorizedCarListView: UIView {
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemGray6
         self.isSkeletonable = true
         setupUI()
     }

@@ -99,11 +99,11 @@ extension UINavigationBar {
         
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
-            appearance.backgroundColor = .white
-            appearance.titleTextAttributes = [.foregroundColor: UIColor.purple]
+            appearance.backgroundColor = .purple
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
 
-            UINavigationBar.appearance().tintColor = .purple
+            UINavigationBar.appearance().tintColor = .white
             UINavigationBar.appearance().standardAppearance = appearance
             UINavigationBar.appearance().compactAppearance = appearance
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
@@ -116,5 +116,57 @@ extension UINavigationBar {
         UINavigationBar.appearance().backIndicatorImage = UIImage(named: "back_arrow")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage(named: "back_arrow")
         
+    }
+}
+
+
+extension String {
+    func formatToDollar() -> String? {
+        let cleanedNumberString = self.replacingOccurrences(of: ".", with: "")
+        
+        guard let number = Double(cleanedNumberString) else {
+            return nil
+        }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = "USD"  // Set the currency code if needed
+        formatter.locale = Locale.current  // Use the current locale
+        
+        if let formattedString = formatter.string(from: NSNumber(value: number)) {
+            return formattedString
+        }
+        
+        return nil
+    }
+}
+
+extension UIView {
+    func addTopBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: width)
+        self.layer.addSublayer(border)
+    }
+
+    func addRightBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: self.frame.size.width - width, y: 0, width: width, height: self.frame.size.height)
+        self.layer.addSublayer(border)
+    }
+
+    func addBottomBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width: self.frame.size.width, height: width)
+        self.layer.addSublayer(border)
+    }
+
+    func addLeftBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: 0, width: width, height: self.frame.size.height)
+        self.layer.addSublayer(border)
     }
 }

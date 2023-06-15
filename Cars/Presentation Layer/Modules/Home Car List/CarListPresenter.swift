@@ -14,6 +14,7 @@ protocol CarListPresenter: AnyObject {
     func interactor(didRetrieveCategories categories: [[String: Any]])
     func interactor(didFailRetrieveCars error: Error)
     func interactor(didSelectCategory category: Category)
+    func interactor(didSelectAllCategories categories: [[String: Any]])
 }
 
 class CarListPresenterImplementation: CarListPresenter {
@@ -23,6 +24,9 @@ class CarListPresenterImplementation: CarListPresenter {
         viewController?.presenter(didRetrieveCategoryName: name)
     }
     
+    func interactor(didSelectAllCategories categories: [[String : Any]]) {
+        viewController?.presenter(didSelectAllCategories: categories)
+    }
     func interactor(didRetrieveCategories categories: [[String : Any]]) {
         viewController?.presenter(didRetrieveCategories: categories)
     }
