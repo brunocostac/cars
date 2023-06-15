@@ -32,7 +32,6 @@ class CarListRouterImplementation: CarListRouter {
     
     func routeToCategorizedCarList(category: Category, instance: CarListViewController) {
         let viewController = CategorizedCarListViewController()
-        viewController.delegate = instance
         CategorizedCarListConfigurator.configureModule(category: category, viewController: viewController)
         navigationController?.pushViewController(viewController, animated: true)
     }

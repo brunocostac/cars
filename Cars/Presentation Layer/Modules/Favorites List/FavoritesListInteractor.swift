@@ -8,14 +8,50 @@
 import Foundation
 
 protocol FavoritesListInteractor: AnyObject {
-    func viewDidLoad()
+    func viewDidAppear()
+    func getCars()
+    func didPressRemoveFavorite(indexPath: IndexPath)
 }
 
 class FavoritesListInteractorImplementation: FavoritesListInteractor {
+   
+    
     var presenter: FavoritesListPresenter?
-    var categories: [[String : Any]] = []
+    private var cars: [Car] = []
 
-    func viewDidLoad()  {
-        
+    func viewDidAppear()  {
+        self.getCars()
+    }
+    
+    func reloadData() {
+        self.getCars()
+    }
+    
+    func getCars() {
+        FavoriteManager().fetchAll(completion: { cars, error in
+            if let cars = cars {
+                self.cars = cars
+                self.presenter?.interactor(didRetrieveCars: cars)
+            }
+            if let error = error {
+                print(error)
+            }
+        })
+    }
+    func didPressRemoveFavorite(indexPath: IndexPath) {
+        self.removeFavorite(car: cars[indexPath.row])
+    }
+}
+
+extension FavoritesListInteractorImplementation {
+    func removeFavorite(car: Car) {
+        FavoriteManager().remove(car: car) { car, error in
+            if error != nil {
+                // TODO: tratar erroz
+            }
+            if car != nil {
+                self.reloadData()
+            }
+        }
     }
 }

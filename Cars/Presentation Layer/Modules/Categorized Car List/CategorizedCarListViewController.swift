@@ -24,8 +24,6 @@ class CategorizedCarListViewController: UIViewController {
     var router: CategorizedCarListRouter?
     private var cars: [Car] = []
     
-    weak var delegate: CategorizedCarListViewControllerDelegate?
-    
     override func loadView() {
         view = categorizedCarsView
         title = self.selectedCategory?.name
@@ -58,7 +56,6 @@ extension CategorizedCarListViewController: CategorizedCarListPresenterOutput {
     func presenter(didObtainCarId id: Int, category: Category) {
         self.router?.navigationController = self.navigationController
         self.router?.routeToDetail(with: id, category: category)
-        self.delegate?.didNavigateToDetailsScreen()
     }
     
     func presenter(didRetrieveCars cars: [Car]) {

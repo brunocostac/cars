@@ -48,10 +48,7 @@ class CarListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.interactor?.getSelectedCategoryName()
-        if self.interactor?.shouldReloadData == true {
-            self.interactor?.reloadData()
-            self.interactor?.shouldReloadData = false
-        }
+        self.interactor?.reloadData()
     }
     
     func showAnimatedGradientInView() {
@@ -128,12 +125,6 @@ extension CarListViewController: CarListPresenterOutput {
     
     func presenter(didFailObtainCarId message: String) {
         self.showError(with: message)
-    }
-}
-
-extension CarListViewController: CategorizedCarListViewControllerDelegate {
-    func didNavigateToDetailsScreen() {
-        self.interactor?.shouldReloadData = true
     }
 }
 

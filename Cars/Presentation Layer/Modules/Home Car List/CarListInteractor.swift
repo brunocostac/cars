@@ -10,7 +10,6 @@ import Foundation
 
 protocol CarListInteractor: AnyObject {
     var carsRetrieved: Bool  {get set}
-    var shouldReloadData: Bool {get set}
     func viewDidLoad()
     func reloadData()
     func getSelectedCategoryName()
@@ -30,7 +29,6 @@ class CarListInteractorImplementation: CarListInteractor {
     private var cars: [Car] = []
     var selectedCategory: Category = Category.newCars
     var carsRetrieved = false
-    var shouldReloadData: Bool = false
     var categories: [[String: Any]] = []
     
     func viewDidLoad()  {

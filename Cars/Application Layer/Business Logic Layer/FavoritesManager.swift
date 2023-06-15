@@ -36,7 +36,10 @@ class FavoriteManager {
         favorite.setValue(car.price, forKey: "price")
         favorite.setValue(car.latitude, forKey: "latitude")
         favorite.setValue(car.longitude, forKey: "longitude")
-
+        favorite.setValue(String(describing: car.url_image), forKey: "url_image")
+        favorite.setValue(String(describing: car.url_info), forKey: "url_info")
+        favorite.setValue(String(describing: car.url_video), forKey: "url_video")
+        
         do {
             try managedContext.save()
             completion(favorite, nil)
