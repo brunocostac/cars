@@ -7,6 +7,7 @@
 
 import UIKit
 import SkeletonView
+import ProgressHUD
 
 protocol CategoriesListPresenterOutput: AnyObject {
     func presenter(didRetrieveCategories categories: [[String : Any]])
@@ -85,10 +86,12 @@ extension CategoriesListViewController: CategoriesListPresenterOutput {
     }
     
     func presenter(didRetrieveCategories categories: [[String : Any]]) {
+        ProgressHUD.show("Loading...")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.view.hideSkeleton()
             self.categories = categories
             self.categoriesView?.tableView.reloadData()
+            ProgressHUD.dismiss()
         }
     }
 }

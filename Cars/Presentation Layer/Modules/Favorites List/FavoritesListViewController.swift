@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import ProgressHUD
 
 protocol FavoritesListPresenterOutput: AnyObject {
     func presenter(didRetrieveCars cars: [Car])
@@ -62,9 +62,11 @@ class FavoritesListViewController: UIViewController, UITableViewDelegate, UITabl
 
 extension FavoritesListViewController: FavoritesListPresenterOutput {
     func presenter(didRetrieveCars cars: [Car]) {
+        ProgressHUD.show("Loading...")
         self.cars = cars
         DispatchQueue.main.async {
             self.favoritesView?.tableView.reloadData()
+            ProgressHUD.dismiss()
         }
     }
 }

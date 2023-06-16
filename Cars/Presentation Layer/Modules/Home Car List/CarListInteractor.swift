@@ -13,7 +13,7 @@ protocol CarListInteractor: AnyObject {
     func viewDidLoad()
     func reloadData()
     func getSelectedCategoryName()
-    func didSelectRow(at index: Int)
+    func didSelectCar(at index: Int)
     func didSelectCategory(at category: Int)
     func didPressFavoriteButton(at index: Int)
     func didPressCategoryButton()
@@ -27,9 +27,15 @@ class CarListInteractorImplementation: CarListInteractor {
     
     private let carsService = CarsServiceImplementation()
     private var cars: [Car] = []
-    var selectedCategory: Category = Category.newCars
+    private var favoriteManager: FavoriteManager?
+    private var selectedCategory: Category = Category.newCars
     var carsRetrieved = false
-    var categories: [[String: Any]] = []
+    private var categories: [[String: Any]] = []
+    
+    
+    init() {
+        self.favoriteManager = FavoriteManager()
+    }
     
     func viewDidLoad()  {
         self.selectDefaultCategory()
@@ -93,7 +99,7 @@ class CarListInteractorImplementation: CarListInteractor {
         self.presenter?.interactor(didSelectCategory: selectedCategory)
     }
     
-    func didSelectRow(at index: Int) {
+    func didSelectCar(at index: Int) {
         if self.cars.indices.contains(index) {
             self.presenter?.interactor(didFindCar: self.cars[index], category: selectedCategory)
         }
@@ -121,7 +127,7 @@ extension CarListInteractorImplementation {
     }
     
     func saveFavorite(car: Car) {
-        FavoriteManager().save(car: car) { car, error in
+        self.favoriteManager?.save(car: car) { car, error in
             if error != nil {
                 // TODO: tratar erro
             }
@@ -132,7 +138,7 @@ extension CarListInteractorImplementation {
     }
     
     func removeFavorite(car: Car) {
-        FavoriteManager().remove(car: car) { car, error in
+        self.favoriteManager?.remove(car: car) { car, error in
             if error != nil {
                 // TODO: tratar erroz
             }
@@ -145,7 +151,7 @@ extension CarListInteractorImplementation {
     func checkIsFavorite(car: Car) -> Bool{
         var isFavorite = false
         
-        FavoriteManager().fetch(car: car) { movie, error in
+        self.favoriteManager?.fetch(car: car) { movie, error in
             if error != nil {
                 isFavorite = false
             }

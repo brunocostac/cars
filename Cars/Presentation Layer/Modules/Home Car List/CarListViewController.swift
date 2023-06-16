@@ -7,6 +7,7 @@
 
 import UIKit
 import SkeletonView
+import ProgressHUD
 
 protocol CarListPresenterOutput: AnyObject {
     func presenter(didRetrieveCars cars: [Car])
@@ -101,10 +102,12 @@ extension CarListViewController: CarListPresenterOutput {
 
     func presenter(didRetrieveCars cars: [Car]) {
         self.interactor?.carsRetrieved = true
+        ProgressHUD.show("Loading...")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.view.hideSkeleton()
             self.cars = cars
             self.carsView?.carCollectionView.reloadData()
+            ProgressHUD.dismiss()
         }
     }
     
@@ -192,7 +195,7 @@ extension CarListViewController: SkeletonCollectionViewDelegate, SkeletonCollect
         if collectionView.tag == 1 {
             self.interactor?.didSelectCategory(at: indexPath.row)
         } else {
-            self.interactor?.didSelectRow(at: indexPath.row)
+            self.interactor?.didSelectCar(at: indexPath.row)
         }
     }
 }

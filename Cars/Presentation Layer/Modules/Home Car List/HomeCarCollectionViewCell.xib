@@ -21,7 +21,7 @@
                         <rect key="frame" x="16" y="16" width="168" height="168"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wr7-r7-vwC">
-                                <rect key="frame" x="131" y="0.0" width="29" height="35"/>
+                                <rect key="frame" x="135" y="0.0" width="29" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="29" id="7Ri-P0-xkr"/>
                                     <constraint firstAttribute="height" constant="35" id="7xF-Sr-4Gy"/>
@@ -115,9 +115,9 @@
                             <constraint firstAttribute="trailing" secondItem="1Ff-NM-gDw" secondAttribute="trailing" id="WfG-Zl-T8F"/>
                             <constraint firstItem="1Ff-NM-gDw" firstAttribute="leading" secondItem="imm-Ka-A8l" secondAttribute="leading" id="daj-Gh-EKt"/>
                             <constraint firstAttribute="trailing" secondItem="1Ff-NM-gDw" secondAttribute="trailing" id="mDe-rk-sso"/>
-                            <constraint firstAttribute="trailing" secondItem="Wr7-r7-vwC" secondAttribute="trailing" constant="8" id="mjX-y4-dK0"/>
                             <constraint firstItem="DRd-FB-5JB" firstAttribute="top" secondItem="1Ff-NM-gDw" secondAttribute="bottom" id="nK8-PS-3bX"/>
                             <constraint firstItem="DRd-FB-5JB" firstAttribute="leading" secondItem="imm-Ka-A8l" secondAttribute="leading" id="oij-LV-2y0"/>
+                            <constraint firstAttribute="trailing" secondItem="Wr7-r7-vwC" secondAttribute="trailing" constant="4" id="pWE-wf-Yvo"/>
                             <constraint firstAttribute="bottom" secondItem="DRd-FB-5JB" secondAttribute="bottom" id="r2L-rB-q82"/>
                             <constraint firstItem="1Ff-NM-gDw" firstAttribute="top" secondItem="imm-Ka-A8l" secondAttribute="top" constant="28" id="tQa-6a-WfC"/>
                             <constraint firstItem="DRd-FB-5JB" firstAttribute="top" secondItem="1Ff-NM-gDw" secondAttribute="bottom" id="uEQ-v7-4J9"/>

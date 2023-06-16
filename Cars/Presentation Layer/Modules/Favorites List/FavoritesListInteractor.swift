@@ -15,10 +15,14 @@ protocol FavoritesListInteractor: AnyObject {
 
 class FavoritesListInteractorImplementation: FavoritesListInteractor {
    
-    
     var presenter: FavoritesListPresenter?
     private var cars: [Car] = []
-
+    private var favoriteManager: FavoriteManager?
+    
+    init() {
+        self.favoriteManager = FavoriteManager()
+    }
+    
     func viewDidAppear()  {
         self.getCars()
     }
@@ -28,7 +32,7 @@ class FavoritesListInteractorImplementation: FavoritesListInteractor {
     }
     
     func getCars() {
-        FavoriteManager().fetchAll(completion: { cars, error in
+        self.favoriteManager?.fetchAll(completion: { cars, error in
             if let cars = cars {
                 self.cars = cars
                 self.presenter?.interactor(didRetrieveCars: cars)
@@ -38,14 +42,9 @@ class FavoritesListInteractorImplementation: FavoritesListInteractor {
             }
         })
     }
-    func didPressRemoveFavorite(indexPath: IndexPath) {
-        self.removeFavorite(car: cars[indexPath.row])
-    }
-}
-
-extension FavoritesListInteractorImplementation {
+    
     func removeFavorite(car: Car) {
-        FavoriteManager().remove(car: car) { car, error in
+        self.favoriteManager?.remove(car: car) { car, error in
             if error != nil {
                 // TODO: tratar erroz
             }
@@ -54,4 +53,9 @@ extension FavoritesListInteractorImplementation {
             }
         }
     }
+    
+    func didPressRemoveFavorite(indexPath: IndexPath) {
+        self.removeFavorite(car: cars[indexPath.row])
+    }
 }
+

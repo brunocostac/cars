@@ -7,5 +7,6 @@ target 'Cars' do
   # Pods for Cars
   pod 'SDWebImage'
   pod 'SkeletonView'
-
+  pod 'ProgressHUD'
+  
 end

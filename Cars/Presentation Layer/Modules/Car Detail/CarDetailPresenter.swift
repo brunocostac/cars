@@ -10,10 +10,10 @@ import Foundation
 protocol CarDetailPresenter: AnyObject {
     func interactor(didRetrieveCar car: Car)
     func interactor(didFailRetrieveCar error: Error)
+    func interactor(didRetrieveCarStatus isFavorite: Bool)
 }
 
 class CarDetailPresenterImplementation: CarDetailPresenter {
-    
     var viewController: CarDetailPresenterOutput?
     
     func interactor(didRetrieveCar car: Car) {
@@ -22,5 +22,9 @@ class CarDetailPresenterImplementation: CarDetailPresenter {
     
     func interactor(didFailRetrieveCar error: Error) {
         viewController?.presenter(didFailRetrieveItem: error.localizedDescription)
+    }
+    
+    func interactor(didRetrieveCarStatus isFavorite: Bool) {
+        viewController?.presenter(didRetrieveCarStatus: isFavorite)
     }
 }

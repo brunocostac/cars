@@ -29,6 +29,7 @@
 		114D7C3029EDDF2B00BC1888 /* CarListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7C2A29EDDF2B00BC1888 /* CarListConfigurator.swift */; };
 		114D7C3129EDDF2B00BC1888 /* CarListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7C2B29EDDF2B00BC1888 /* CarListPresenter.swift */; };
 		114D7C3329EDDF9A00BC1888 /* CarListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D7C3229EDDF9A00BC1888 /* CarListViewController.swift */; };
+		1156B3312A3CE10F005B5D3D /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156B3302A3CE10E005B5D3D /* ProgressHUD.swift */; };
 		116174DD2A2F823A005BDCD4 /* FavoritesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116174DC2A2F823A005BDCD4 /* FavoritesListViewController.swift */; };
 		116174DF2A2F8264005BDCD4 /* FavoritesListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116174DE2A2F8264005BDCD4 /* FavoritesListConfigurator.swift */; };
 		116174E12A2F828E005BDCD4 /* FavoritesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116174E02A2F828E005BDCD4 /* FavoritesListView.swift */; };
@@ -84,6 +85,7 @@
 		114D7C2A29EDDF2B00BC1888 /* CarListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListConfigurator.swift; sourceTree = "<group>"; };
 		114D7C2B29EDDF2B00BC1888 /* CarListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListPresenter.swift; sourceTree = "<group>"; };
 		114D7C3229EDDF9A00BC1888 /* CarListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarListViewController.swift; sourceTree = "<group>"; };
+		1156B3302A3CE10E005B5D3D /* ProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		116174DC2A2F823A005BDCD4 /* FavoritesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListViewController.swift; sourceTree = "<group>"; };
 		116174DE2A2F8264005BDCD4 /* FavoritesListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListConfigurator.swift; sourceTree = "<group>"; };
 		116174E02A2F828E005BDCD4 /* FavoritesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListView.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				114D7C0329EDC2CE00BC1888 /* LaunchScreen.storyboard */,
 				114D7C1A29EDDE9C00BC1888 /* Extensions.swift */,
 				110A08922A20E1B6001A18E3 /* CustomUITabBarController.swift */,
+				1156B3302A3CE10E005B5D3D /* ProgressHUD.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				11F95EAC2A26AC560067B240 /* CategoriesListView.swift in Sources */,
 				11AE0E7F29FB271100B21C1A /* CategoryCollectionViewCell.swift in Sources */,
 				114BC67929F08905001A401F /* Category.swift in Sources */,
+				1156B3312A3CE10F005B5D3D /* ProgressHUD.swift in Sources */,
 				116174E32A2F82CF005BDCD4 /* FavoritesListRouter.swift in Sources */,
 				11923F612A02DD6E002D2223 /* CategorizedCarListInteractor.swift in Sources */,
 				114D7C2429EDDF0E00BC1888 /* CarDetailView.swift in Sources */,

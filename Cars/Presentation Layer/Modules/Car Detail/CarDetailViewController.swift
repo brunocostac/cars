@@ -11,15 +11,23 @@ import SkeletonView
 protocol CarDetailPresenterOutput: AnyObject {
     func presenter(didRetrieveCar car: Car)
     func presenter(didFailRetrieveItem message: String)
+    func presenter(didRetrieveCarStatus isFavorite: Bool)
 }
 
 class CarDetailViewController: UIViewController {
+    
     // MARK: - Properties
     var carDetailView: CarDetailView?
     var interactor: CarDetailInteractor?
     weak var presenter: CarDetailPresenter?
     var router: CarDetailRouter?
     
+    var car: Car?
+    var isFavorite: Bool = false
+    
+    var favButton: UIBarButtonItem?
+    
+
     // MARK: - Lifecycle Methods
     override func loadView() {
         super.loadView()
@@ -28,9 +36,13 @@ class CarDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showAnimatedGradientSkeleton()
-        self.interactor?.viewDidLoad()
         self.createFavoriteButton()
+        self.showAnimatedGradientSkeleton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool)  {
+        super.viewDidAppear(animated)
+        self.interactor?.viewDidAppear()
     }
     
     func showAnimatedGradientSkeleton() {
@@ -43,14 +55,13 @@ class CarDetailViewController: UIViewController {
         }
     }
     
-    
     func createFavoriteButton() {
-        let favButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favButtonTapped))
+        self.favButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favButtonTapped))
         navigationItem.rightBarButtonItem = favButton
     }
     
     @objc func favButtonTapped() {
-        
+        self.interactor?.didPressFavoriteButton(car: self.car!)
     }
     
     func updateTitle(with title: String) {
@@ -70,7 +81,20 @@ class CarDetailViewController: UIViewController {
 
 // MARK: - Presenter Output
 extension CarDetailViewController: CarDetailPresenterOutput {
+    func presenter(didRetrieveCarStatus isFavorite: Bool) {
+        if isFavorite {
+            DispatchQueue.main.async {
+                self.favButton?.image = UIImage(systemName: "heart.fill")
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.favButton?.image = UIImage(systemName: "heart")
+            }
+        }
+    }
+    
     func presenter(didRetrieveCar car: Car) {
+        self.car = car
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.hideAnimatedGradientSkeleton()
             self.updateTitle(with: car.name)
