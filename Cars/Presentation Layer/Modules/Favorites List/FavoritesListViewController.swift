@@ -27,11 +27,19 @@ class FavoritesListViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
+        self.showAnimatedGradientInView()
      }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.interactor?.viewDidAppear()
+    }
+    
+    func showAnimatedGradientInView() {
+        view.isSkeletonable = true
+        DispatchQueue.main.async {
+            self.view.showAnimatedSkeleton()
+        }
     }
     
     func setupTableView() {
@@ -64,7 +72,8 @@ extension FavoritesListViewController: FavoritesListPresenterOutput {
     func presenter(didRetrieveCars cars: [Car]) {
         ProgressHUD.show("Loading...")
         self.cars = cars
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.view.hideSkeleton()
             self.favoritesView?.tableView.reloadData()
             ProgressHUD.dismiss()
         }
