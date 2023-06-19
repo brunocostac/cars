@@ -5,7 +5,5 @@
 
 * Arquitetura utilizada: VIP
 * Desenvolvimento de telas com ViewCode
-* Biblioteca de terceiros: SdWebIMage
-
-
-Projeto em andamento
+* Biblioteca de terceiros: SdWebImage, SkeletonView e ProgressHud
+* Banco dados local com CoreData
