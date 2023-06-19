@@ -10,7 +10,7 @@
 
 ## Como rodar?
 
-rode o comando pod install na raiz do projeto
+execute o comando pod install na raiz do projeto para instalar as bibliotecas de terceiros.
 
 ### Screenshots
 
