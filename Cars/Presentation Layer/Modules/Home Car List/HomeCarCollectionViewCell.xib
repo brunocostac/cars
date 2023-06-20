@@ -44,8 +44,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNM-78-dos">
                                         <rect key="frame" x="0.0" y="0.0" width="168" height="33.666666666666664"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rSG-XZ-c3v">
-                                                <rect key="frame" x="0.0" y="11.666666666666671" width="160" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rSG-XZ-c3v">
+                                                <rect key="frame" x="0.0" y="33.666666666666657" width="160" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -65,8 +65,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76I-X5-fcQ">
                                         <rect key="frame" x="0.0" y="34.666666666666657" width="168" height="33.333333333333343"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="$ 5000" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-DG-QTk">
-                                                <rect key="frame" x="0.0" y="0.0" width="160" height="33.333333333333336"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-DG-QTk">
+                                                <rect key="frame" x="4" y="-2.8421709430404007e-14" width="160" height="33.333333333333336"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -77,9 +77,13 @@
                                             </label>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="dJ5-DG-QTk" secondAttribute="bottom" id="1S5-bS-SVd"/>
                                             <constraint firstItem="dJ5-DG-QTk" firstAttribute="top" secondItem="76I-X5-fcQ" secondAttribute="top" id="36e-86-BwY"/>
+                                            <constraint firstAttribute="trailing" secondItem="dJ5-DG-QTk" secondAttribute="trailing" constant="4" id="In6-oe-bDg"/>
                                             <constraint firstAttribute="bottom" secondItem="dJ5-DG-QTk" secondAttribute="bottom" id="ONy-8o-iwV"/>
+                                            <constraint firstItem="dJ5-DG-QTk" firstAttribute="leading" secondItem="76I-X5-fcQ" secondAttribute="leading" constant="4" id="Ubw-I3-IAe"/>
                                             <constraint firstItem="dJ5-DG-QTk" firstAttribute="leading" secondItem="76I-X5-fcQ" secondAttribute="leading" id="Ug8-lp-mV0"/>
+                                            <constraint firstItem="dJ5-DG-QTk" firstAttribute="top" secondItem="76I-X5-fcQ" secondAttribute="top" id="nTX-Ry-PUU"/>
                                             <constraint firstAttribute="trailing" secondItem="dJ5-DG-QTk" secondAttribute="trailing" constant="8" id="xjz-wn-R2I"/>
                                         </constraints>
                                     </view>

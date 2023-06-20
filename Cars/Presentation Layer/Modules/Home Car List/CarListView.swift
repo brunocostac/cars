@@ -28,7 +28,6 @@ class CarListView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Avenir-Heavy", size: 18)
         label.textColor = .black
-        label.text = "Explore"
         label.isSkeletonable = true
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +52,6 @@ class CarListView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Avenir-Heavy", size: 18)
         label.textColor = .black
-        label.text = "New Cars"
         label.isSkeletonable = true
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -122,6 +120,8 @@ extension CarListView {
             overrideUserInterfaceStyle = .light
         }
         
+        self.categoryLabel.text = "Explore"
+        self.titleLabel.text = "New Cars"
         self.backgroundColor =  UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
         self.addSubview(categoryView)
         self.addSubview(lineView)
